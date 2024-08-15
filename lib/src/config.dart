@@ -1,5 +1,11 @@
 abstract class ConfigReader {
-  static String getBaseURL() {
-    return "http://52.81.215.222:19333";
+  static String getBaseURL(bool mainnet) {
+    return mainnet ? "https://node.zetrix.com" : "https://test-node.zetrix.com";
+  }
+
+  static String getCredentialURL(bool mainnet) {
+    return mainnet
+        ? "https://credential.zetrix.com"
+        : "https://test-credential.zetrix.com";
   }
 }

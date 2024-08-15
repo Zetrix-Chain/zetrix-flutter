@@ -1,7 +1,8 @@
 library zetrix_flutter;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/utils/helpers.dart' show Utils;
+export 'src/services/transaction.service.dart' show TransactionService;
+export 'src/services/block.service.dart' show BlockService;
+export 'src/services/vc.service.dart' show VcService;
+export 'src/services/account.service.dart' show AccountService;
+export 'src/utils/encryption.dart' show Encryption;

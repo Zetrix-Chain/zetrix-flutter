@@ -2,7 +2,6 @@ import 'package:zetrix_flutter/src/models/operations/create-account-entity.dart'
 import 'package:zetrix_flutter/src/models/operations/create-account.dart';
 import 'package:zetrix_flutter/src/models/operations/priv.dart';
 import 'package:zetrix_flutter/src/models/operations/thresholds.dart';
-import 'package:zetrix_flutter/src/utils/tools.dart';
 
 import '../models/base-operation.dart';
 import 'operation-type.enum.dart';

@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../utils/operation-type.enum.dart';
-
 part 'base-response.g.dart';
 
 @JsonSerializable()

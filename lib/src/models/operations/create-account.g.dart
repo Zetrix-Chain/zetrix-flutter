@@ -8,7 +8,7 @@ part of 'create-account.dart';
 
 CreateAccount _$CreateAccountFromJson(Map<String, dynamic> json) =>
     CreateAccount(
-      type: json['type'] as int?,
+      type: (json['type'] as num?)?.toInt(),
       createAccount: json['create_account'] == null
           ? null
           : CreateAccountEntity.fromJson(

@@ -3,10 +3,12 @@ import 'package:zetrix_flutter/src/models/operations/thresholds.dart';
 
 part 'priv.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Priv {
   @JsonKey(name: "thresholds")
   Thresholds? thresholds;
+
+  @JsonKey(name: 'master_weight')
   int? masterWeight;
 
   Priv({this.thresholds, this.masterWeight});

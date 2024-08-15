@@ -7,7 +7,7 @@ part of 'base-response.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse(
-      errorCode: json['error_code'] as int?,
+      errorCode: (json['error_code'] as num?)?.toInt(),
       errorDesc: json['error_desc'] as String?,
     );
 

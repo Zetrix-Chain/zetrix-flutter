@@ -7,7 +7,7 @@ part of 'thresholds.dart';
 // **************************************************************************
 
 Thresholds _$ThresholdsFromJson(Map<String, dynamic> json) => Thresholds(
-      txThreshold: json['tx_threshold'] as int?,
+      txThreshold: (json['tx_threshold'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ThresholdsToJson(Thresholds instance) =>

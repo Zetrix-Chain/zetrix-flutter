@@ -10,10 +10,10 @@ TransactionBuildBlobReq _$TransactionBuildBlobReqFromJson(
         Map<String, dynamic> json) =>
     TransactionBuildBlobReq(
       sourceAddress: json['source_address'] as String?,
-      gasPrice: json['gas_price'] as int?,
-      feeLimit: json['fee_limit'] as int?,
-      nonce: json['nonce'] as int?,
-      ceilLedgerSeq: json['ceil_ledger_seq'] as int?,
+      gasPrice: (json['gas_price'] as num?)?.toInt(),
+      feeLimit: (json['fee_limit'] as num?)?.toInt(),
+      nonce: (json['nonce'] as num?)?.toInt(),
+      ceilLedgerSeq: (json['ceil_ledger_seq'] as num?)?.toInt(),
       operations: (json['operations'] as List<dynamic>?)
           ?.map((e) => BaseOperation.fromJson(e as Map<String, dynamic>))
           .toList(),

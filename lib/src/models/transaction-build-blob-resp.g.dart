@@ -14,7 +14,7 @@ TransactionBuildBlobResp _$TransactionBuildBlobRespFromJson(
           : TransactionBuildBlobResult.fromJson(
               json['result'] as Map<String, dynamic>),
     )
-      ..errorCode = json['error_code'] as int?
+      ..errorCode = (json['error_code'] as num?)?.toInt()
       ..errorDesc = json['error_desc'] as String?;
 
 Map<String, dynamic> _$TransactionBuildBlobRespToJson(
