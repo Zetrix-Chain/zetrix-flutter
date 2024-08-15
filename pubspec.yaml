@@ -2,6 +2,7 @@ name: zetrix_flutter
 description: Zetrix flutter SDK for Zetrix Blockchain
 version: 0.0.1
 homepage: https://docs.zetrix.com/en
+repository: https://github.com/Zetrix-Chain/zetrix-flutter
 
 environment:
   sdk: ">=3.3.0 <4.0.0"

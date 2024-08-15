@@ -30,10 +30,10 @@ import 'package:zetrix_flutter.dart';
 
 Please refer to the doc folder to further information.
 
-| Feature     | Location                             |
-|-------------|--------------------------------------|
-| Account     | [account.md](doc/account.md)         |
-| Transaction | [transaction.md](doc/transaction.md) |
-| Block       | [block.md](doc/block.md)             |
-| VC          | [VC.md](doc/vc.md)                   |
+| Feature     | Location                                                                                         |
+|-------------|--------------------------------------------------------------------------------------------------|
+| Account     | [account.md](https://github.com/Zetrix-Chain/zetrix-flutter/blob/develop/doc/account.md)         |
+| Transaction | [transaction.md](https://github.com/Zetrix-Chain/zetrix-flutter/blob/develop/doc/transaction.md) |
+| Block       | [block.md](https://github.com/Zetrix-Chain/zetrix-flutter/blob/develop/doc/block.md)             |
+| VC          | [vc.md](https://github.com/Zetrix-Chain/zetrix-flutter/blob/develop/doc/vc.md)                   |
 
