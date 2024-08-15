@@ -13,7 +13,7 @@ import 'package:zetrix_flutter/src/utils/vp_jws.dart';
 void main (){
   
   test('generate vp jws', () async {
-    final service = VpService(false);
+    final service = ZetrixVpService(false);
     final VpJws vpJws = VpJws(); 
 
     VpGenerateReq req = VpGenerateReq();

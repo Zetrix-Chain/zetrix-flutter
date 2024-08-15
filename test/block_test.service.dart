@@ -7,7 +7,7 @@ import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
   test('test getBlockNumber', () async {
-    final service = BlockService(false);
+    final service = ZetrixBlockService(false);
 
     ApiResult<BlockNumberResp> resp = await service.getBlockNumber();
     BlockNumberResp? numberResp;

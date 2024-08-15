@@ -4,9 +4,9 @@ This Flutter plugin provides an API for querying information about an applicatio
 
 ## Platform Support
 
-| Android |  iOS  | MacOS |  Web  | Linux | Windows |
-| :-----: | :---: | :---: | :---: | :---: | :-----: |
-|✅|✅|✅|✅|✅|✅|
+| Android | iOS | MacOS | Web | Linux | Windows |
+|:-------:|:---:|:-----:|:---:|:-----:|:-------:|
+|    ✅    |  ✅  |   ✅   |  ✅  |   ✅   |    ✅    |
 
 ## Requirements
 
@@ -27,4 +27,13 @@ You can use the Zetrix flutter package to access functionality in Zetrix Blockch
 import 'package:zetrix_flutter.dart';
 
 ```
+
+Please refer to the doc folder to further information.
+
+| Feature     | Location                             |
+|-------------|--------------------------------------|
+| Account     | [account.md](doc/account.md)         |
+| Transaction | [transaction.md](doc/transaction.md) |
+| Block       | [block.md](doc/block.md)             |
+| VC          | [VC.md](doc/vc.md)                   |
 

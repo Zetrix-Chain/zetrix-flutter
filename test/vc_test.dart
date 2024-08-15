@@ -34,12 +34,12 @@ import 'package:zetrix_flutter/src/utils/vp_jws.dart';
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
-  final VcService service = VcService(false);
-  final Encryption encryption = Encryption();
+  final service = ZetrixVcService(false);
+  final encryption = Encryption();
 
   var holder = {
-    "address": "ZTX3XBHJ74QnbXjFQKK8J3vUpk8odnVpHGGVG",
-    "privKey": "privBxrYn1NToKaY7cRJCYAuGPb7zyN3B93FzxdQWyimFkfdTwz4G77q",
+    "address": "<ADDRESS>",
+    "privKey": "<PRIV_KEY>",
     "token": "",
     "blob": "",
     "blodId": "",
@@ -60,8 +60,8 @@ void main() {
   var verify = {"blobId": "", "blob": "", "qrCode": ""};
 
   var issuer = {
-    "address": "ZTX3Wk4JiwggfZquiTgj4KwY6wNRFNVTrbgxe",
-    "privKey": "privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo",
+    "address": "<ADDRESS>",
+    "privKey": "<PRIV_KEY>",
     "token": "",
     "blob": "",
     "blodId": "",

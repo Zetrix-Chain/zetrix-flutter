@@ -11,8 +11,8 @@ import 'package:zetrix_flutter/src/models/vp/vp-presentation.dart';
 
 import 'base_cred.service.dart';
 
-class VpService extends BaseCredService {
-  VpService(bool mainnet) : super(mainnet);
+class ZetrixVpService extends BaseCredService {
+  ZetrixVpService(bool mainnet) : super(mainnet);
 
   final storage = const FlutterSecureStorage();
 

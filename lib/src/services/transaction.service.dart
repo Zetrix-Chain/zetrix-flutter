@@ -13,8 +13,8 @@ import '../models/transaction-build-blob-resp.dart';
 
 import '../models/transaction-info-resp.dart';
 
-class TransactionService extends BaseNodeService {
-  TransactionService(bool mainnet) : super(mainnet);
+class ZetrixTransactionService extends BaseNodeService {
+  ZetrixTransactionService(bool mainnet) : super(mainnet);
 
   Future<ApiResult<TransactionBuildBlobResp>> buildBlob(
       TransactionBuildBlobReq req) async {

@@ -32,8 +32,8 @@ import '../models/vc/verify/vc-verification-result.dart';
 import '../utils/sdk-error.enum.dart';
 import '../utils/secure_storage.dart';
 
-class VcService extends BaseCredService {
-  VcService(bool mainnet) : super(mainnet);
+class ZetrixVcService extends BaseCredService {
+  ZetrixVcService(bool mainnet) : super(mainnet);
   final secureStorage = SecureStorage();
 
   /// Generate blob for token generation

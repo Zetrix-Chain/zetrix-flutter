@@ -13,8 +13,8 @@ import '../models/network-exceptions.dart';
 import '../utils/sdk-error.enum.dart';
 import '../utils/tools.dart';
 
-class AccountService extends BaseNodeService {
-  AccountService(bool mainnet) : super(mainnet);
+class ZetrixAccountService extends BaseNodeService {
+  ZetrixAccountService(bool mainnet) : super(mainnet);
 
   Future<ApiResult<CreateAccountResult>> createAccount() async {
     try {

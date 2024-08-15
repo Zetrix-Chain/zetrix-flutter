@@ -10,7 +10,7 @@ import 'package:zetrix_flutter/src/services/transaction.service.dart';
 import 'package:zetrix_flutter/src/utils/operation-type.enum.dart';
 
 void main() {
-  final service = TransactionService(false);
+  final service = ZetrixTransactionService(false);
 
   test('creating blob', () async {
     TransactionBuildBlobReq req = TransactionBuildBlobReq();

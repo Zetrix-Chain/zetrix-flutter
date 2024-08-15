@@ -5,8 +5,8 @@ import '../models/api-result.dart';
 import '../models/network-exceptions.dart';
 import '../models/block-number-resp.dart';
 
-class BlockService extends BaseNodeService {
-  BlockService(bool mainnet) : super(mainnet);
+class ZetrixBlockService extends BaseNodeService {
+  ZetrixBlockService(bool mainnet) : super(mainnet);
 
   Future<ApiResult<BlockNumberResp>> getBlockNumber() async {
     var url = '/getLedger';

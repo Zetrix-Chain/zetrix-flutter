@@ -10,7 +10,7 @@ import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import 'package:zetrix_flutter/src/services/account.service.dart';
 
 void main() {
-  final account = AccountService(false);
+  final account = ZetrixAccountService(false);
 
   var userAccount = {"address": "", "pubKey": "", "privKey": ""};
 
