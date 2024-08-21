@@ -18,7 +18,7 @@ final encryption = Encryption();
 
 VcRegisterBlobReq req = VcRegisterBlobReq();
 req.address = <USER_ADDRESS>;
-ApiResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
+SDKResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
 ```
 
 #### 2. Sign the blob
@@ -36,7 +36,7 @@ req.blobSign = <SIGNED_BLOB>;
 req.publicKey = <PUBLIC_KEY>;
 req.address = <USER_ADDRESS>;
 
-ApiResult<VcRegisterSubmitResp> resp = await service.getRegisterToken(req);
+SDKResult<VcRegisterSubmitResp> resp = await service.getRegisterToken(req);
 ```
 
 ### Apply VC
@@ -68,7 +68,7 @@ req.content = content;
 req.templateId = <TEMPLATE_ADDRESS>;
 req.publicKey = <HOLDER_PUBLIC_KEY>;
 
-ApiResult<VcApplyResult> resp = await service.applyVc(<ACCESS_TOKEN>, req);
+SDKResult<VcApplyResult> resp = await service.applyVc(<ACCESS_TOKEN>, req);
 ```
 
 ### Issue VC
@@ -82,7 +82,7 @@ sign and submit the blob for issuing VC.
 #### 1. Generate the blob
 
 ```
-ApiResult<VcAuditBlobResult> resp = await service.issueVcBlob(<ISSUER_ACCESS_TOKEN>, <APPLY_NO>);
+SDKResult<VcAuditBlobResult> resp = await service.issueVcBlob(<ISSUER_ACCESS_TOKEN>, <APPLY_NO>);
 ```
 
 #### 2. Sign the blob
@@ -105,7 +105,7 @@ req.signPayload = <SIGNED_PAYLOAD>;
 req.publicKey = <ISSUER_PUBLIC_KEY>;
 req.border = 0;
 
-ApiResult<VcAuditSubmitResult> resp = await service.issueVcSubmit(<ISSUER_TOKEN>, req);
+SDKResult<VcAuditSubmitResult> resp = await service.issueVcSubmit(<ISSUER_TOKEN>, req);
 ```
 
 ### View VC list
@@ -119,7 +119,7 @@ req.pageStart = 1;
 req.pageSize = 10;
 req.status = 0; // 0: apply, 1: approved, 2: rejected
 
-ApiResult<VcInfoResp> resp = await service.getVcList(<HOLDER_TOKEN>, req);
+SDKResult<VcInfoResp> resp = await service.getVcList(<HOLDER_TOKEN>, req);
 ```
 
 ### VC Download
@@ -131,7 +131,7 @@ VcDownloadReq req = VcDownloadReq();
 req.userAddress = <HOLDER_ADDRESS>;
 req.credentialId = <VC_ID>;
 
-ApiResult<VcDownloadResult> resp = await service.downloadVc(<HOLDER_TOKEN>, req);
+SDKResult<VcDownloadResult> resp = await service.downloadVc(<HOLDER_TOKEN>, req);
 ```
 
 ### Reject VC Application
@@ -139,7 +139,7 @@ ApiResult<VcDownloadResult> resp = await service.downloadVc(<HOLDER_TOKEN>, req)
 Issuer can reject VC application via SDK or website https://credential.zetrix.com.
 
 ```
-ApiResult<bool> resp = await service.rejectVc(<ISSUER_TOKEN>, <ISSUER_ADDRESS>, <APPLICATION_NUMBER>);
+SDKResult<bool> resp = await service.rejectVc(<ISSUER_TOKEN>, <ISSUER_ADDRESS>, <APPLICATION_NUMBER>);
 ```
 
 ### QR Code Generation
@@ -160,7 +160,7 @@ req.vcId = <VC_ID>;
 req.contentAssert = json.encode(contentAssert);
 req.jws = <JWS>;
 
-ApiResult<VcGenerateQrBlobResult> resp = await service.generateQrBlob(<HOLDER_TOKEN>, req);
+SDKResult<VcGenerateQrBlobResult> resp = await service.generateQrBlob(<HOLDER_TOKEN>, req);
 ```
 
 #### 2. Sign the blob
@@ -182,7 +182,7 @@ req.signBlob = <SIGNED_BLOB>;
 req.publicKey = <PUBLIC_KEY>;
 req.userAddress = "";
 
-ApiResult<String> resp = await service.generateQrSubmit(<HOLDER_TOKEN>, req);
+SDKResult<String> resp = await service.generateQrSubmit(<HOLDER_TOKEN>, req);
 ```
 
 ### Verify VC
@@ -190,5 +190,5 @@ ApiResult<String> resp = await service.generateQrSubmit(<HOLDER_TOKEN>, req);
 Verifier can verify VC by using the QR code (UUID) value obtained from the holder.
 
 ```
-ApiResult<VcVerificationResult> resp = await service.verifyQrCode(<QR_CODE>);
+SDKResult<VcVerificationResult> resp = await service.verifyQrCode(<QR_CODE>);
 ```

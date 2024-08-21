@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/api-result.dart';
+import 'package:zetrix_flutter/src/models/sdk-result.dart';
 import 'package:zetrix_flutter/src/models/base-operation.dart';
 import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import 'package:zetrix_flutter/src/models/transaction-build-blob-req.dart';
@@ -27,7 +27,7 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    ApiResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
+    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
     TransactionBuildBlobResp? blobResp;
     resp.when(success: (TransactionBuildBlobResp? obj) {
       blobResp = obj;
@@ -45,7 +45,7 @@ void main() {
     String hash =
         '33e3df28879dae5a8d9c6c4b0317a96005d458d503a1c72a2297af8cf53ca55b';
 
-    ApiResult<TransactionInfoResp> resp =
+    SDKResult<TransactionInfoResp> resp =
         await service.getTransactionHistory(hash);
     TransactionInfoResp? infoResp;
     resp.when(success: (obj) {

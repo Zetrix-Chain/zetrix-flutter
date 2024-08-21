@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/api-result.dart';
+import 'package:zetrix_flutter/src/models/sdk-result.dart';
 import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import 'package:zetrix_flutter/src/models/sign-blob-resp.dart';
 import 'package:zetrix_flutter/src/models/sign-message-resp.dart';
@@ -74,7 +74,7 @@ void main() {
     VcRegisterBlobReq req = VcRegisterBlobReq();
     req.address = holder["address"];
 
-    ApiResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
+    SDKResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
 
     resp.when(success: (VcRegisterBlobResp? obj) {
       if (obj != null) {
@@ -105,7 +105,7 @@ void main() {
 
     holder["pubKey"] = signResp.publicKey!;
 
-    ApiResult<VcRegisterSubmitResp> submitResp =
+    SDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
@@ -126,7 +126,7 @@ void main() {
     VcRegisterBlobReq req = VcRegisterBlobReq();
     req.address = issuer["address"];
 
-    ApiResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
+    SDKResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
 
     resp.when(success: (VcRegisterBlobResp? obj) {
       if (obj != null) {
@@ -157,7 +157,7 @@ void main() {
 
     issuer["pubKey"] = signResp.publicKey!;
 
-    ApiResult<VcRegisterSubmitResp> submitResp =
+    SDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
@@ -184,7 +184,7 @@ void main() {
     req.publicKey = signResp.publicKey;
     req.address = holder["address"];
 
-    ApiResult<VcRegisterSubmitResp> submitResp =
+    SDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
@@ -210,7 +210,7 @@ void main() {
     req.blobSign = signResp.signBlob;
     req.publicKey = signResp.publicKey;
 
-    ApiResult<VcRegisterSubmitResp> submitResp =
+    SDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
@@ -250,7 +250,7 @@ void main() {
     req.templateId = "ZTX3JdX5Mi6wsByrPoXvTZXwdaEuKfbtk3Lux";
     req.publicKey = holder["pubKey"];
 
-    ApiResult<VcApplyResult> resp =
+    SDKResult<VcApplyResult> resp =
         await service.applyVc(holder["token"]!, req);
 
     resp.when(success: (VcApplyResult? obj) {
@@ -271,7 +271,7 @@ void main() {
   test('vc issue blob', () async {
     VcAuditBlobResult? finalResp;
 
-    ApiResult<VcAuditBlobResult> resp =
+    SDKResult<VcAuditBlobResult> resp =
         await service.issueVcBlob(issuer["token"]!, apply['applyNo']!);
 
     resp.when(success: (VcAuditBlobResult? obj) {
@@ -307,7 +307,7 @@ void main() {
     req.publicKey = signPayload.publicKey;
     req.border = 0;
 
-    ApiResult<VcAuditSubmitResult> resp =
+    SDKResult<VcAuditSubmitResult> resp =
         await service.issueVcSubmit(issuer["token"]!, req);
 
     resp.when(success: (VcAuditSubmitResult? obj) {
@@ -334,7 +334,7 @@ void main() {
     req.pageSize = 10;
     req.status = 0;
 
-    ApiResult<VcInfoResp> resp = await service.getVcList(holder["token"]!, req);
+    SDKResult<VcInfoResp> resp = await service.getVcList(holder["token"]!, req);
 
     resp.when(success: (VcInfoResp? obj) {
       if (obj != null) {
@@ -358,7 +358,7 @@ void main() {
     req.userAddress = holder["address"];
     req.credentialId = vc["vcId"];
 
-    ApiResult<VcDownloadResult> resp =
+    SDKResult<VcDownloadResult> resp =
         await service.downloadVc(holder["token"]!, req);
 
     resp.when(success: (VcDownloadResult? obj) {
@@ -402,7 +402,7 @@ void main() {
     req.templateId = "ZTX3JdX5Mi6wsByrPoXvTZXwdaEuKfbtk3Lux";
     req.publicKey = holder["pubKey"];
 
-    ApiResult<VcApplyResult> resp =
+    SDKResult<VcApplyResult> resp =
         await service.applyVc(holder["token"]!, req);
 
     resp.when(success: (VcApplyResult? obj) {
@@ -423,7 +423,7 @@ void main() {
   test('vc reject', () async {
     bool? finalResp;
 
-    ApiResult<bool> resp = await service.rejectVc(
+    SDKResult<bool> resp = await service.rejectVc(
         issuer["token"]!, issuer['address']!, apply['applyNo']!);
 
     resp.when(success: (bool? obj) {
@@ -447,7 +447,7 @@ void main() {
     req.contentAssert = json.encode(contentAssert);
     req.jws = vc['jws'];
 
-    ApiResult<VcGenerateQrBlobResult> resp =
+    SDKResult<VcGenerateQrBlobResult> resp =
         await service.generateQrBlob(holder["token"]!, req);
 
     resp.when(success: (VcGenerateQrBlobResult? obj) {
@@ -478,7 +478,7 @@ void main() {
     req.publicKey = sign.publicKey;
     req.userAddress = "";
 
-    ApiResult<String> resp =
+    SDKResult<String> resp =
         await service.generateQrSubmit(holder["token"]!, req);
 
     resp.when(success: (String? obj) {
@@ -499,7 +499,7 @@ void main() {
   test('vc verify using qrcode', () async {
     VcVerificationResult? finalResp;
 
-    ApiResult<VcVerificationResult> resp =
+    SDKResult<VcVerificationResult> resp =
         await service.verifyQrCode(verify['qrCode']!);
 
     resp.when(success: (VcVerificationResult? obj) {
@@ -528,7 +528,7 @@ void main() {
     var needSignStr = await vcJws.signJws(req.vc ?? '');
     req.vcjws = await vcJws.buildJws(needSignStr, signStr);
 
-    ApiResult<VcFinalizeResp> resp = await service.signedVc(req);
+    SDKResult<VcFinalizeResp> resp = await service.signedVc(req);
 
     VcFinalizeResp? vcGetTokenResp;
 

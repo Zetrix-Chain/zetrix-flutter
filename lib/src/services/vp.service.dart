@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:zetrix_flutter/src/models/api-result.dart';
+import 'package:zetrix_flutter/src/models/sdk-result.dart';
 import 'package:zetrix_flutter/src/models/vp/credential-parse.dart';
 import 'package:zetrix_flutter/src/models/vp/vp-finalize-req.dart';
 import 'package:zetrix_flutter/src/models/vp/vc-vp-proof.dart';
@@ -16,7 +16,7 @@ class ZetrixVpService extends BaseCredService {
 
   final storage = const FlutterSecureStorage();
 
-  Future<ApiResult<VpGenerateResp>> generateVp(VpGenerateReq req) async {
+  Future<SDKResult<VpGenerateResp>> generateVp(VpGenerateReq req) async {
     final vpResult = VerifiablePresentation();
 
     // Add context
@@ -54,10 +54,10 @@ class ZetrixVpService extends BaseCredService {
     final vpResp = VpGenerateResp(vp: vpResult);
 
     // Return the API result
-    return ApiResult.success(data: vpResp);
+    return SDKResult.success(data: vpResp);
   }
 
-  Future<ApiResult<VpGenerateResp>> signedVp(VpFinalizeReq req) async {
+  Future<SDKResult<VpGenerateResp>> signedVp(VpFinalizeReq req) async {
     final vpResult = VerifiablePresentation();
 
     // Add proof
@@ -74,6 +74,6 @@ class ZetrixVpService extends BaseCredService {
     final vpResp = VpGenerateResp(vp: vpResult);
 
     // Return the API result
-    return ApiResult.success(data: vpResp);
+    return SDKResult.success(data: vpResp);
   }
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'api-result.dart';
+part of 'sdk-result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ApiResult<T> {
+mixin _$SDKResult<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) success,
@@ -57,16 +57,16 @@ mixin _$ApiResult<T> {
 }
 
 /// @nodoc
-abstract class $ApiResultCopyWith<T, $Res> {
-  factory $ApiResultCopyWith(
-          ApiResult<T> value, $Res Function(ApiResult<T>) then) =
-      _$ApiResultCopyWithImpl<T, $Res, ApiResult<T>>;
+abstract class $SDKResultCopyWith<T, $Res> {
+  factory $SDKResultCopyWith(
+          SDKResult<T> value, $Res Function(SDKResult<T>) then) =
+      _$SDKResultCopyWithImpl<T, $Res, SDKResult<T>>;
 }
 
 /// @nodoc
-class _$ApiResultCopyWithImpl<T, $Res, $Val extends ApiResult<T>>
-    implements $ApiResultCopyWith<T, $Res> {
-  _$ApiResultCopyWithImpl(this._value, this._then);
+class _$SDKResultCopyWithImpl<T, $Res, $Val extends SDKResult<T>>
+    implements $SDKResultCopyWith<T, $Res> {
+  _$SDKResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -85,7 +85,7 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$ApiResultCopyWithImpl<T, $Res, _$SuccessImpl<T>>
+    extends _$SDKResultCopyWithImpl<T, $Res, _$SuccessImpl<T>>
     implements _$$SuccessImplCopyWith<T, $Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
@@ -115,14 +115,14 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ApiResult<$T>.success(data: $data)';
+    return 'SDKResult<$T>.success(data: $data)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ApiResult<$T>.success'))
+      ..add(DiagnosticsProperty('type', 'SDKResult<$T>.success'))
       ..add(DiagnosticsProperty('data', data));
   }
 
@@ -207,7 +207,7 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
   }
 }
 
-abstract class Success<T> implements ApiResult<T> {
+abstract class Success<T> implements SDKResult<T> {
   const factory Success({final T? data}) = _$SuccessImpl<T>;
 
   T? get data;
@@ -229,7 +229,7 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<T, $Res>
-    extends _$ApiResultCopyWithImpl<T, $Res, _$FailureImpl<T>>
+    extends _$SDKResultCopyWithImpl<T, $Res, _$FailureImpl<T>>
     implements _$$FailureImplCopyWith<T, $Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl<T> _value, $Res Function(_$FailureImpl<T>) _then)
@@ -271,14 +271,14 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ApiResult<$T>.failure(error: $error)';
+    return 'SDKResult<$T>.failure(error: $error)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ApiResult<$T>.failure'))
+      ..add(DiagnosticsProperty('type', 'SDKResult<$T>.failure'))
       ..add(DiagnosticsProperty('error', error));
   }
 
@@ -362,7 +362,7 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   }
 }
 
-abstract class Failure<T> implements ApiResult<T> {
+abstract class Failure<T> implements SDKResult<T> {
   const factory Failure({final NetworkExceptions? error}) = _$FailureImpl<T>;
 
   NetworkExceptions? get error;

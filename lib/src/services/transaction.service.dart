@@ -6,7 +6,7 @@ import 'package:zetrix_flutter/src/utils/sdk-error.enum.dart';
 import 'package:zetrix_flutter/src/utils/tools.dart';
 import 'package:zetrix_flutter/src/utils/transaction_builder.dart';
 
-import '../models/api-result.dart';
+import '../models/sdk-result.dart';
 import '../models/network-exceptions.dart';
 import '../models/transaction-build-blob-req.dart';
 import '../models/transaction-build-blob-resp.dart';
@@ -16,12 +16,12 @@ import '../models/transaction-info-resp.dart';
 class ZetrixTransactionService extends BaseNodeService {
   ZetrixTransactionService(bool mainnet) : super(mainnet);
 
-  Future<ApiResult<TransactionBuildBlobResp>> buildBlob(
+  Future<SDKResult<TransactionBuildBlobResp>> buildBlob(
       TransactionBuildBlobReq req) async {
     String url = '/getTransactionBlob';
 
     if (!Tools.validateParams(req.toJson())) {
-      return const ApiResult.failure(error: BadRequest());
+      return const SDKResult.failure(error: BadRequest());
     }
 
     List<Object> objs =
@@ -41,9 +41,9 @@ class ZetrixTransactionService extends BaseNodeService {
           TransactionBuildBlobResp.fromJson(response.data);
 
       if (transactionBuildBlobResp.errorCode == SdkError.success.code) {
-        return ApiResult.success(data: transactionBuildBlobResp);
+        return SDKResult.success(data: transactionBuildBlobResp);
       } else {
-        return ApiResult.failure(
+        return SDKResult.failure(
             error: DefaultError(transactionBuildBlobResp.errorDesc ??
                 SdkError.resultNotFound.toString()));
       }
@@ -51,16 +51,16 @@ class ZetrixTransactionService extends BaseNodeService {
       if (kDebugMode) {
         print(e);
       }
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
     }
   }
 
-  Future<ApiResult<TransactionInfoResp>> getTransactionHistory(
+  Future<SDKResult<TransactionInfoResp>> getTransactionHistory(
       String hash) async {
     String url = '/getTransactionHistory';
 
     if (Tools.isEmptyString(hash)) {
-      return const ApiResult.failure(error: BadRequest());
+      return const SDKResult.failure(error: BadRequest());
     }
 
     try {
@@ -70,14 +70,14 @@ class ZetrixTransactionService extends BaseNodeService {
           TransactionInfoResp.fromJson(response.data);
 
       if (transactionInfoResp.errorCode == SdkError.success.code) {
-        return ApiResult.success(data: transactionInfoResp);
+        return SDKResult.success(data: transactionInfoResp);
       } else if (transactionInfoResp.errorCode ==
           SdkError.queryResultNotExist.code) {
-        return ApiResult.failure(
+        return SDKResult.failure(
             error: DefaultError(transactionInfoResp.errorDesc ??
                 SdkError.queryResultNotExist.toString()));
       } else {
-        return ApiResult.failure(
+        return SDKResult.failure(
             error: DefaultError(transactionInfoResp.errorDesc ??
                 SdkError.resultNotFound.toString()));
       }
@@ -85,7 +85,7 @@ class ZetrixTransactionService extends BaseNodeService {
       if (kDebugMode) {
         print(e);
       }
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
     }
   }
 }

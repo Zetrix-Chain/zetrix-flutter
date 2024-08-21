@@ -8,7 +8,7 @@ import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 import '../models/account-info-result.dart';
 import '../models/account-nonce-result.dart';
-import '../models/api-result.dart';
+import '../models/sdk-result.dart';
 import '../models/network-exceptions.dart';
 import '../utils/sdk-error.enum.dart';
 import '../utils/tools.dart';
@@ -16,24 +16,24 @@ import '../utils/tools.dart';
 class ZetrixAccountService extends BaseNodeService {
   ZetrixAccountService(bool mainnet) : super(mainnet);
 
-  Future<ApiResult<CreateAccountResult>> createAccount() async {
+  Future<SDKResult<CreateAccountResult>> createAccount() async {
     try {
       Encryption encryption = Encryption();
       CreateAccountResult keyPair = await encryption.generateKeyPair();
-      return ApiResult.success(data: keyPair);
+      return SDKResult.success(data: keyPair);
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
     }
   }
 
-  Future<ApiResult<AccountInfo>> getAccountInfo(String address) async {
+  Future<SDKResult<AccountInfo>> getAccountInfo(String address) async {
     String url = '/getAccount';
 
     if (Tools.isEmptyString(address)) {
-      return const ApiResult.failure(error: BadRequest());
+      return const SDKResult.failure(error: BadRequest());
     }
 
     try {
@@ -46,9 +46,9 @@ class ZetrixAccountService extends BaseNodeService {
       AccountInfoResp accountInfoResp = AccountInfoResp.fromJson(response.data);
 
       if (accountInfoResp.errorCode == SdkError.success.code) {
-        return ApiResult.success(data: accountInfoResp.result);
+        return SDKResult.success(data: accountInfoResp.result);
       } else {
-        return ApiResult.failure(
+        return SDKResult.failure(
             error: DefaultError(accountInfoResp.errorDesc ??
                 SdkError.resultNotFound.toString()));
       }
@@ -56,13 +56,13 @@ class ZetrixAccountService extends BaseNodeService {
       if (kDebugMode) {
         print(e);
       }
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
     }
   }
 
-  Future<ApiResult<AccountValidResult>> validateAccount(String address) async {
+  Future<SDKResult<AccountValidResult>> validateAccount(String address) async {
     if (Tools.isEmptyString(address)) {
-      return const ApiResult.failure(error: BadRequest());
+      return const SDKResult.failure(error: BadRequest());
     }
 
     AccountValidResult resp = AccountValidResult();
@@ -71,11 +71,11 @@ class ZetrixAccountService extends BaseNodeService {
 
     resp.isValid = encryption.checkAddress(address);
 
-    return ApiResult.success(data: resp);
+    return SDKResult.success(data: resp);
   }
 
-  Future<ApiResult<AccountBalanceResult>> getBalance(String address) async {
-    ApiResult<AccountInfo> accountResp = await getAccountInfo(address);
+  Future<SDKResult<AccountBalanceResult>> getBalance(String address) async {
+    SDKResult<AccountInfo> accountResp = await getAccountInfo(address);
     AccountBalanceResult resp = AccountBalanceResult();
     int bal = 0;
 
@@ -89,11 +89,11 @@ class ZetrixAccountService extends BaseNodeService {
 
     resp.balance = bal;
 
-    return ApiResult.success(data: resp);
+    return SDKResult.success(data: resp);
   }
 
-  Future<ApiResult<AccountNonceResult>> getNonce(String address) async {
-    ApiResult<AccountInfo> accountResp = await getAccountInfo(address);
+  Future<SDKResult<AccountNonceResult>> getNonce(String address) async {
+    SDKResult<AccountInfo> accountResp = await getAccountInfo(address);
     AccountNonceResult resp = AccountNonceResult();
     int nonce = 1;
 
@@ -107,7 +107,7 @@ class ZetrixAccountService extends BaseNodeService {
 
     resp.nonce = nonce;
 
-    return ApiResult.success(data: resp);
+    return SDKResult.success(data: resp);
   }
 
   getMetadata() {}
