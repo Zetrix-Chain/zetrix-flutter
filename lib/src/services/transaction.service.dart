@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:zetrix_flutter/src/models/common/signature.dart';
 import 'package:zetrix_flutter/src/models/operations/build-blob.dart';
@@ -9,21 +7,17 @@ import 'package:zetrix_flutter/src/models/transaction/transaction-build-blob-req
 import 'package:zetrix_flutter/src/models/transaction/transaction-build-blob-resp.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-info-resp.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-sign-req.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-sign-resp.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-sign-result.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-req.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-resp.dart';
 import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-result.dart';
+import 'package:zetrix_flutter/src/models/transaction/sign-blob-resp.dart';
+import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-item-req.dart';
 import 'package:zetrix_flutter/src/services/base_node.service.dart';
+import 'package:zetrix_flutter/src/utils/encryption.dart';
 import 'package:zetrix_flutter/src/utils/sdk-error.enum.dart';
 import 'package:zetrix_flutter/src/utils/tools.dart';
 import 'package:zetrix_flutter/src/utils/transaction_builder.dart';
-
-import '../../zetrix_flutter.dart';
-import '../models/chain/operation.dart';
-import '../models/operations/account-activate-operation.dart';
-import '../models/transaction/sign-blob-resp.dart';
-import '../models/transaction/transaction-submit-blob-item-req.dart';
 
 class ZetrixTransactionService extends BaseNodeService {
   ZetrixTransactionService(bool mainnet) : super(mainnet);

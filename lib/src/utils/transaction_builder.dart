@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:zetrix_flutter/src/models/chain/operation.dart';
 import 'package:zetrix_flutter/src/models/common/priv.dart';
 import 'package:zetrix_flutter/src/models/common/threshold.dart';
@@ -9,7 +6,6 @@ import 'package:zetrix_flutter/src/models/operations/account-set-metadata-operat
 import 'package:zetrix_flutter/src/models/operations/account-set-privilege-operation.dart';
 import 'package:zetrix_flutter/src/models/operations/asset-send-operation.dart';
 import 'package:zetrix_flutter/src/models/operations/base-operation.dart';
-import 'package:logger/logger.dart';
 import 'package:zetrix_flutter/src/models/operations/contract-create-operation.dart';
 import 'package:zetrix_flutter/src/models/operations/contract-invoke-by-asset-operation.dart';
 import 'package:zetrix_flutter/src/models/operations/contract-invoke-by-gas-operation.dart';
@@ -21,8 +17,6 @@ import '../models/operations/log-create-operation.dart';
 import 'operation-type.enum.dart';
 
 class TransactionBuilder {
-  final logger = Logger(printer: PrettyPrinter());
-
   Operation activateAccount(
       AccountActivateOperation activateOp, String transSourceAddress) {
     if (activateOp.sourceAddress == null) {

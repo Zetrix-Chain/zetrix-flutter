@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-build-blob-resp.dart';
 
 import 'network-exceptions.dart';
 

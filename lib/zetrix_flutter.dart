@@ -1,4 +1,4 @@
-library zetrix_flutter;
+library;
 
 export 'src/utils/helpers.dart' show Utils;
 export 'src/services/transaction.service.dart' show ZetrixTransactionService;

@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zetrix_flutter/src/models/common/signature.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-result.dart';
-
 import 'package:zetrix_flutter/src/models/base-response.dart';
 
 part 'transaction-sign-result.g.dart';
