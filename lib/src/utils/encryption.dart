@@ -4,10 +4,9 @@ import 'package:pinenacl/digests.dart';
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
 import 'package:pinenacl/ed25519.dart';
-import 'package:zetrix_flutter/src/models/create-account-result.dart';
-import 'package:zetrix_flutter/src/models/sign-message-resp.dart';
-
-import '../models/sign-blob-resp.dart';
+import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
+import 'package:zetrix_flutter/src/models/transaction/sign-message-resp.dart';
+import 'package:zetrix_flutter/src/models/transaction/sign-blob-resp.dart';
 
 class Encryption {
   Future<CreateAccountResult> generateKeyPair() async {

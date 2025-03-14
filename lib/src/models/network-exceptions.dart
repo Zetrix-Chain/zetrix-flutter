@@ -46,22 +46,19 @@ abstract class NetworkExceptions with _$NetworkExceptions {
     if (error is Exception) {
       try {
         NetworkExceptions networkExceptions;
-        if (error is DioError) {
+        if (error is DioException) {
           switch (error.type) {
-            case DioErrorType.cancel:
+            case DioExceptionType.cancel:
               networkExceptions = const NetworkExceptions.requestCancelled();
               break;
-            case DioErrorType.connectTimeout:
+            case DioExceptionType.connectionTimeout:
               networkExceptions = const NetworkExceptions.requestTimeout();
               break;
-            case DioErrorType.other:
+            case DioExceptionType.unknown:
               networkExceptions =
                   const NetworkExceptions.noInternetConnection();
               break;
-            case DioErrorType.receiveTimeout:
-              networkExceptions = const NetworkExceptions.sendTimeout();
-              break;
-            case DioErrorType.response:
+            case DioExceptionType.receiveTimeout:
               switch (error.response!.statusCode) {
                 case 400:
                   networkExceptions = NetworkExceptions.defaultError(error
@@ -102,9 +99,15 @@ abstract class NetworkExceptions with _$NetworkExceptions {
                   );
               }
               break;
-            case DioErrorType.sendTimeout:
+            case DioExceptionType.sendTimeout:
               networkExceptions = const NetworkExceptions.sendTimeout();
               break;
+            case DioExceptionType.badCertificate:
+              networkExceptions = const NetworkExceptions.badRequest();
+            case DioExceptionType.badResponse:
+              networkExceptions = const NetworkExceptions.badRequest();
+            case DioExceptionType.connectionError:
+              networkExceptions = const NetworkExceptions.badRequest();
           }
         } else if (error is SocketException) {
           networkExceptions = const NetworkExceptions.noInternetConnection();

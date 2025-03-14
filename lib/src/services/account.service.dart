@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:zetrix_flutter/src/models/account-balance-result.dart';
-import 'package:zetrix_flutter/src/models/account-info-resp.dart';
-import 'package:zetrix_flutter/src/models/account-valid-result.dart';
-import 'package:zetrix_flutter/src/models/create-account-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-balance-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-info-resp.dart';
+import 'package:zetrix_flutter/src/models/account/account-valid-result.dart';
+import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
 import 'package:zetrix_flutter/src/services/base_node.service.dart';
-import 'package:zetrix_flutter/zetrix_flutter.dart';
+import 'package:zetrix_flutter/src/models/account/account-info-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-nonce-result.dart';
+import 'package:zetrix_flutter/src/utils/encryption.dart';
 
-import '../models/account-info-result.dart';
-import '../models/account-nonce-result.dart';
-import '../models/sdk-result.dart';
-import '../models/network-exceptions.dart';
+import 'package:zetrix_flutter/src/models/sdk-result.dart';
+import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import '../utils/sdk-error.enum.dart';
 import '../utils/tools.dart';
 

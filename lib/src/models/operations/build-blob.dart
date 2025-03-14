@@ -1,9 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../chain/operation.dart';
+
 part 'build-blob.g.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
-class BuildBlob<T> {
+@JsonSerializable(explicitToJson: true)
+class BuildBlob {
   @JsonKey(name: "source_address")
   String? sourceAddress;
 
@@ -17,7 +19,7 @@ class BuildBlob<T> {
   int? gasPrice;
 
   @JsonKey(name: "operations")
-  List<T>? operations;
+  List<Operation>? operations;
 
   BuildBlob(
       {this.sourceAddress,
@@ -26,10 +28,11 @@ class BuildBlob<T> {
       this.gasPrice,
       this.operations});
 
-  factory BuildBlob.fromJson(
-          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
-      _$BuildBlobFromJson(json, fromJsonT);
+  factory BuildBlob.fromJson(Map<String, dynamic> json) =>
+      _$BuildBlobFromJson(json);
 
-  Map<String, dynamic> toJson(T Function(Object? json) fromJsonT) =>
-      _$BuildBlobToJson(this, fromJsonT);
+  Map<String, dynamic> toJson() => _$BuildBlobToJson(this);
+
+  static BuildBlob fromJsonModel(Map<String, dynamic> json) =>
+      BuildBlob.fromJson(json);
 }

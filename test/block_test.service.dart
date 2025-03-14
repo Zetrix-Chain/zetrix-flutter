@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/block-number-resp.dart';
+import 'package:zetrix_flutter/src/models/block/block-number-resp.dart';
 import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 

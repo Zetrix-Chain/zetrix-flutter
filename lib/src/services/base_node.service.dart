@@ -7,7 +7,7 @@ abstract class BaseNodeService {
 
   BaseNodeService(bool mainnet) {
     _dio.options.baseUrl = ConfigReader.getBaseURL(mainnet);
-    _dio.options.connectTimeout = 60 * 1000;
+    _dio.options.connectTimeout = Duration(seconds: 60);
   }
 
   Dio get dio {

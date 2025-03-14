@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/account-balance-result.dart';
-import 'package:zetrix_flutter/src/models/account-info-result.dart';
-import 'package:zetrix_flutter/src/models/account-nonce-result.dart';
-import 'package:zetrix_flutter/src/models/account-valid-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-balance-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-info-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-nonce-result.dart';
+import 'package:zetrix_flutter/src/models/account/account-valid-result.dart';
+import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
 import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/create-account-result.dart';
 import 'package:zetrix_flutter/src/models/network-exceptions.dart';
 import 'package:zetrix_flutter/src/services/account.service.dart';
 

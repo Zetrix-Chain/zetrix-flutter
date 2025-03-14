@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:zetrix_flutter/src/services/base_node.service.dart';
 import 'package:zetrix_flutter/src/utils/sdk-error.enum.dart';
-import '../models/sdk-result.dart';
-import '../models/network-exceptions.dart';
-import '../models/block-number-resp.dart';
+import 'package:zetrix_flutter/src/models/sdk-result.dart';
+import 'package:zetrix_flutter/src/models/network-exceptions.dart';
+import 'package:zetrix_flutter/src/models/block/block-number-resp.dart';
 
 class ZetrixBlockService extends BaseNodeService {
   ZetrixBlockService(bool mainnet) : super(mainnet);
