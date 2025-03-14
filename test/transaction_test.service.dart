@@ -26,8 +26,8 @@ import 'package:zetrix_flutter/src/utils/operation-type.enum.dart';
 void main() {
   final service = ZetrixTransactionService(false);
 
-  String privKey = "privBzQfE8ydCo7NS3wPDf17ooPdUdPCnDGGJvFQBbQ8RLXxVRgwR72F";
-  String zetrixAddr = "ZTX3XDeQk86zpZqM7k2xCBDD75oZ7gk3M3Gnc";
+  String privKey = "";
+  String zetrixAddr = "";
 
   test('creating blob for account creation', () async {
     TransactionBuildBlobReq req = TransactionBuildBlobReq();
