@@ -1,32 +1,36 @@
 import 'package:flutter/foundation.dart';
+import 'package:zetrix_flutter/src/models/base-response.dart';
 import 'package:zetrix_flutter/src/services/base_node.service.dart';
 import 'package:zetrix_flutter/src/utils/sdk-error.enum.dart';
 import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/network-exceptions.dart';
-import 'package:zetrix_flutter/src/models/block/block-number-resp.dart';
+import 'package:zetrix_flutter/src/models/sdk-exceptions.dart';
+import 'package:zetrix_flutter/src/models/block/block-number.dart';
 
 class ZetrixBlockService extends BaseNodeService {
-  ZetrixBlockService(bool mainnet) : super(mainnet);
+  ZetrixBlockService(super.mainnet);
 
-  Future<SDKResult<BlockNumberResp>> getBlockNumber() async {
+  Future<ZetrixSDKResult<BlockNumber>> getBlockNumber() async {
     var url = '/getLedger';
 
     try {
       final response = await dio.get(url);
-      BlockNumberResp blockNumberResp = BlockNumberResp.fromJson(response.data);
+      BaseResponse<BlockNumber> resp = BaseResponse<BlockNumber>.fromJson(
+          response.data,
+          (json) => BlockNumber.fromJson(json as Map<String, dynamic>));
 
-      if (blockNumberResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: blockNumberResp);
+      if (resp.errorCode == SdkError.success.code) {
+        return ZetrixSDKResult.success(data: resp.result);
       } else {
-        return SDKResult.failure(
-            error: DefaultError(blockNumberResp.errorDesc ??
-                SdkError.resultNotFound.toString()));
+        return ZetrixSDKResult.failure(
+            error: DefaultError(
+                resp.errorDesc ?? SdkError.resultNotFound.toString()));
       }
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 }

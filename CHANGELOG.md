@@ -1,3 +1,8 @@
+## 0.0.5
+
+### Changed
+- Add export for all modules, fix shared models.
+
 ## 0.0.4
 
 ### Added

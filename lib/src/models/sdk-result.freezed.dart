@@ -15,24 +15,24 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$SDKResult<T> {
+mixin _$ZetrixSDKResult<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) success,
-    required TResult Function(NetworkExceptions? error) failure,
+    required TResult Function(ZetrixSDKExceptions? error) failure,
   }) =>
       throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? success,
-    TResult? Function(NetworkExceptions? error)? failure,
+    TResult? Function(ZetrixSDKExceptions? error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? success,
-    TResult Function(NetworkExceptions? error)? failure,
+    TResult Function(ZetrixSDKExceptions? error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,16 +60,16 @@ mixin _$SDKResult<T> {
 }
 
 /// @nodoc
-abstract class $SDKResultCopyWith<T, $Res> {
-  factory $SDKResultCopyWith(
-          SDKResult<T> value, $Res Function(SDKResult<T>) then) =
-      _$SDKResultCopyWithImpl<T, $Res, SDKResult<T>>;
+abstract class $ZetrixSDKResultCopyWith<T, $Res> {
+  factory $ZetrixSDKResultCopyWith(
+          ZetrixSDKResult<T> value, $Res Function(ZetrixSDKResult<T>) then) =
+      _$ZetrixSDKResultCopyWithImpl<T, $Res, ZetrixSDKResult<T>>;
 }
 
 /// @nodoc
-class _$SDKResultCopyWithImpl<T, $Res, $Val extends SDKResult<T>>
-    implements $SDKResultCopyWith<T, $Res> {
-  _$SDKResultCopyWithImpl(this._value, this._then);
+class _$ZetrixSDKResultCopyWithImpl<T, $Res, $Val extends ZetrixSDKResult<T>>
+    implements $ZetrixSDKResultCopyWith<T, $Res> {
+  _$ZetrixSDKResultCopyWithImpl(this._value, this._then);
 
 // ignore: unused_field
   final $Val _value;
@@ -88,7 +88,7 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$SDKResultCopyWithImpl<T, $Res, _$SuccessImpl<T>>
+    extends _$ZetrixSDKResultCopyWithImpl<T, $Res, _$SuccessImpl<T>>
     implements _$$SuccessImplCopyWith<T, $Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
@@ -118,14 +118,14 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SDKResult<$T>.success(data: $data)';
+    return 'ZetrixSDKResult<$T>.success(data: $data)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SDKResult<$T>.success'))
+      ..add(DiagnosticsProperty('type', 'ZetrixSDKResult<$T>.success'))
       ..add(DiagnosticsProperty('data', data));
   }
 
@@ -151,7 +151,7 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) success,
-    required TResult Function(NetworkExceptions? error) failure,
+    required TResult Function(ZetrixSDKExceptions? error) failure,
   }) {
     return success(data);
   }
@@ -160,7 +160,7 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? success,
-    TResult? Function(NetworkExceptions? error)? failure,
+    TResult? Function(ZetrixSDKExceptions? error)? failure,
   }) {
     return success?.call(data);
   }
@@ -169,7 +169,7 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? success,
-    TResult Function(NetworkExceptions? error)? failure,
+    TResult Function(ZetrixSDKExceptions? error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -210,7 +210,7 @@ class _$SuccessImpl<T> with DiagnosticableTreeMixin implements Success<T> {
   }
 }
 
-abstract class Success<T> implements SDKResult<T> {
+abstract class Success<T> implements ZetrixSDKResult<T> {
   const factory Success({final T? data}) = _$SuccessImpl<T>;
 
   T? get data;
@@ -225,14 +225,14 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
           _$FailureImpl<T> value, $Res Function(_$FailureImpl<T>) then) =
       __$$FailureImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({NetworkExceptions? error});
+  $Res call({ZetrixSDKExceptions? error});
 
-  $NetworkExceptionsCopyWith<$Res>? get error;
+  $ZetrixSDKExceptionsCopyWith<$Res>? get error;
 }
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<T, $Res>
-    extends _$SDKResultCopyWithImpl<T, $Res, _$FailureImpl<T>>
+    extends _$ZetrixSDKResultCopyWithImpl<T, $Res, _$FailureImpl<T>>
     implements _$$FailureImplCopyWith<T, $Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl<T> _value, $Res Function(_$FailureImpl<T>) _then)
@@ -247,18 +247,18 @@ class __$$FailureImplCopyWithImpl<T, $Res>
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as NetworkExceptions?,
+              as ZetrixSDKExceptions?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NetworkExceptionsCopyWith<$Res>? get error {
+  $ZetrixSDKExceptionsCopyWith<$Res>? get error {
     if (_value.error == null) {
       return null;
     }
 
-    return $NetworkExceptionsCopyWith<$Res>(_value.error!, (value) {
+    return $ZetrixSDKExceptionsCopyWith<$Res>(_value.error!, (value) {
       return _then(_value.copyWith(error: value));
     });
   }
@@ -270,18 +270,18 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   const _$FailureImpl({this.error});
 
   @override
-  final NetworkExceptions? error;
+  final ZetrixSDKExceptions? error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SDKResult<$T>.failure(error: $error)';
+    return 'ZetrixSDKResult<$T>.failure(error: $error)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SDKResult<$T>.failure'))
+      ..add(DiagnosticsProperty('type', 'ZetrixSDKResult<$T>.failure'))
       ..add(DiagnosticsProperty('error', error));
   }
 
@@ -306,7 +306,7 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) success,
-    required TResult Function(NetworkExceptions? error) failure,
+    required TResult Function(ZetrixSDKExceptions? error) failure,
   }) {
     return failure(error);
   }
@@ -315,7 +315,7 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? success,
-    TResult? Function(NetworkExceptions? error)? failure,
+    TResult? Function(ZetrixSDKExceptions? error)? failure,
   }) {
     return failure?.call(error);
   }
@@ -324,7 +324,7 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? success,
-    TResult Function(NetworkExceptions? error)? failure,
+    TResult Function(ZetrixSDKExceptions? error)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -365,10 +365,10 @@ class _$FailureImpl<T> with DiagnosticableTreeMixin implements Failure<T> {
   }
 }
 
-abstract class Failure<T> implements SDKResult<T> {
-  const factory Failure({final NetworkExceptions? error}) = _$FailureImpl<T>;
+abstract class Failure<T> implements ZetrixSDKResult<T> {
+  const factory Failure({final ZetrixSDKExceptions? error}) = _$FailureImpl<T>;
 
-  NetworkExceptions? get error;
+  ZetrixSDKExceptions? get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<T, _$FailureImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;

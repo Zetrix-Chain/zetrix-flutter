@@ -12,11 +12,11 @@ import 'package:zetrix_flutter/src/models/vp/vp-presentation.dart';
 import 'base_cred.service.dart';
 
 class ZetrixVpService extends BaseCredService {
-  ZetrixVpService(bool mainnet) : super(mainnet);
+  ZetrixVpService(super.mainnet);
 
   final storage = const FlutterSecureStorage();
 
-  Future<SDKResult<VpGenerateResp>> generateVp(VpGenerateReq req) async {
+  Future<ZetrixSDKResult<VpGenerateResp>> generateVp(VpGenerateReq req) async {
     final vpResult = VerifiablePresentation();
 
     // Add context
@@ -54,10 +54,10 @@ class ZetrixVpService extends BaseCredService {
     final vpResp = VpGenerateResp(vp: vpResult);
 
     // Return the API result
-    return SDKResult.success(data: vpResp);
+    return ZetrixSDKResult.success(data: vpResp);
   }
 
-  Future<SDKResult<VpGenerateResp>> signedVp(VpFinalizeReq req) async {
+  Future<ZetrixSDKResult<VpGenerateResp>> signedVp(VpFinalizeReq req) async {
     final vpResult = VerifiablePresentation();
 
     // Add proof
@@ -74,6 +74,6 @@ class ZetrixVpService extends BaseCredService {
     final vpResp = VpGenerateResp(vp: vpResult);
 
     // Return the API result
-    return SDKResult.success(data: vpResp);
+    return ZetrixSDKResult.success(data: vpResp);
   }
 }

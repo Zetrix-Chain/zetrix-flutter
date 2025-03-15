@@ -1,13 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/account/account-balance-result.dart';
-import 'package:zetrix_flutter/src/models/account/account-info-result.dart';
-import 'package:zetrix_flutter/src/models/account/account-nonce-result.dart';
-import 'package:zetrix_flutter/src/models/account/account-valid-result.dart';
-import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
-import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/network-exceptions.dart';
-import 'package:zetrix_flutter/src/services/account.service.dart';
+import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
   final account = ZetrixAccountService(false);
@@ -15,10 +8,10 @@ void main() {
   var userAccount = {"address": "", "pubKey": "", "privKey": ""};
 
   test('Create account', () async {
-    CreateAccountResult? finalResp;
-    SDKResult<CreateAccountResult> resp = await account.createAccount();
+    CreateAccount? finalResp;
+    ZetrixSDKResult<CreateAccount> resp = await account.createAccount();
 
-    resp.when(success: (CreateAccountResult? obj) {
+    resp.when(success: (CreateAccount? obj) {
       if (obj != null) {
         finalResp = obj;
         print(finalResp!.toJson().toString());
@@ -26,7 +19,7 @@ void main() {
         userAccount["pubKey"] = finalResp!.publicKey!;
         userAccount["privKey"] = finalResp!.privateKey!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -35,7 +28,7 @@ void main() {
 
   test('Check account info - account not activated', () async {
     AccountInfo? finalResp;
-    SDKResult<AccountInfo> resp =
+    ZetrixSDKResult<AccountInfo> resp =
         await account.getAccountInfo(userAccount["address"]!);
     resp.when(success: (AccountInfo? obj) {
       if (obj != null) {
@@ -44,7 +37,7 @@ void main() {
           print(finalResp!.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -53,7 +46,7 @@ void main() {
 
   test('Check account info - account activated', () async {
     AccountInfo? finalResp;
-    SDKResult<AccountInfo> resp =
+    ZetrixSDKResult<AccountInfo> resp =
         await account.getAccountInfo("ZTX3eCbfDcZjf8XBCF6ouStyhRZDT9QxVC7Vw");
     resp.when(success: (AccountInfo? obj) {
       if (obj != null) {
@@ -62,7 +55,7 @@ void main() {
           print(finalResp!.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -70,17 +63,17 @@ void main() {
   });
 
   test('Get balance', () async {
-    AccountBalanceResult? finalResp;
-    SDKResult<AccountBalanceResult> resp =
+    AccountBalance? finalResp;
+    ZetrixSDKResult<AccountBalance> resp =
         await account.getBalance("ZTX3eCbfDcZjf8XBCF6ouStyhRZDT9QxVC7Vw");
-    resp.when(success: (AccountBalanceResult? obj) {
+    resp.when(success: (AccountBalance? obj) {
       if (obj != null) {
         finalResp = obj;
         if (kDebugMode) {
           print(finalResp!.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -88,17 +81,17 @@ void main() {
   });
 
   test('Check account isValid', () async {
-    AccountValidResult? finalResp;
-    SDKResult<AccountValidResult> resp =
+    AccountValid? finalResp;
+    ZetrixSDKResult<AccountValid> resp =
         await account.validateAccount("ZTX3eCbfDcZjf8XBCF6ouStyhRZDT9QxVC7Vw");
-    resp.when(success: (AccountValidResult? obj) {
+    resp.when(success: (AccountValid? obj) {
       if (obj != null) {
         finalResp = obj;
         if (kDebugMode) {
           print(finalResp!.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -106,17 +99,17 @@ void main() {
   });
 
   test('Get account nonce', () async {
-    AccountNonceResult? finalResp;
-    SDKResult<AccountNonceResult> resp =
+    AccountNonce? finalResp;
+    ZetrixSDKResult<AccountNonce> resp =
         await account.getNonce("ZTX3eCbfDcZjf8XBCF6ouStyhRZDT9QxVC7Vw");
-    resp.when(success: (AccountNonceResult? obj) {
+    resp.when(success: (AccountNonce? obj) {
       if (obj != null) {
         finalResp = obj;
         if (kDebugMode) {
           print(finalResp!.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 

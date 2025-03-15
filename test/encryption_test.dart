@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pinenacl/ed25519.dart' as nacl;
-import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
-import 'package:zetrix_flutter/src/models/transaction/sign-message-resp.dart';
-import 'package:zetrix_flutter/src/utils/encryption.dart';
 import "package:hex/hex.dart";
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 
@@ -12,7 +9,7 @@ void main() {
   Encryption encryption = Encryption();
   test('Generate keypair', () async {
     // final keyPair = Encryption();
-    CreateAccountResult keypair = await encryption.generateKeyPair();
+    CreateAccount keypair = await encryption.generateKeyPair();
 
     assert(keypair.address is String);
     assert(keypair.address is String);
@@ -48,7 +45,7 @@ void main() {
   test('Sign message', () async {
     // Signature signature = Signature();
 
-    SignMessageResp resp = await encryption.signMessage(
+    SignMessage resp = await encryption.signMessage(
         "testABC", 'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
 
     expect(resp, isNot(null));

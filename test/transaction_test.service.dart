@@ -1,27 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/common/signer.dart';
-import 'package:zetrix_flutter/src/models/operations/account-activate-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/account-set-metadata-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/account-set-privilege-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/asset-issue-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/asset-send-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/contract-create-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/contract-invoke-by-asset-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/contract-invoke-by-gas-operation.dart';
-import 'package:zetrix_flutter/src/models/operations/gas-send-operation.dart';
-import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/operations/base-operation.dart';
-import 'package:zetrix_flutter/src/models/network-exceptions.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-build-blob-req.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-build-blob-resp.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-info-resp.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-sign-req.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-sign-resp.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-sign-result.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-req.dart';
-import 'package:zetrix_flutter/src/models/transaction/transaction-submit-blob-result.dart';
-import 'package:zetrix_flutter/src/services/transaction.service.dart';
 import 'package:zetrix_flutter/src/utils/operation-type.enum.dart';
+import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
   final service = ZetrixTransactionService(false);
@@ -46,11 +25,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -75,11 +55,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -113,11 +94,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -141,11 +123,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -171,11 +154,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -199,11 +183,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -227,11 +212,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -255,11 +241,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -284,11 +271,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -315,11 +303,12 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
-    resp.when(success: (TransactionBuildBlobResp? obj) {
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
+    resp.when(success: (TransactionBuildBlobResult? obj) {
       blobResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
 
@@ -345,17 +334,19 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
 
-    await resp.when(success: (TransactionBuildBlobResp? obj) async {
+    await resp.when(success: (TransactionBuildBlobResult? obj) async {
       blobResp = obj;
 
       TransactionSignReq signReq = TransactionSignReq();
-      signReq.blob = blobResp!.result!.transactionBlob;
+      signReq.blob = blobResp!.transactionBlob;
       signReq.privateKeys = [privKey];
 
-      SDKResult<TransactionSignResult> respSign = await service.sign(signReq);
+      ZetrixSDKResult<TransactionSignResult> respSign =
+          await service.sign(signReq);
       TransactionSignResult? signResp;
       await respSign.when(success: (TransactionSignResult? obj) async {
         signResp = obj;
@@ -364,20 +355,20 @@ void main() {
         submitReq.signatures = signResp!.signatures!;
         submitReq.transactionBlob = signReq.blob;
 
-        SDKResult<TransactionSubmitBlobResult> respSubmit =
+        ZetrixSDKResult<TransactionSubmitBlobResult> respSubmit =
             await service.submit(submitReq);
         await respSubmit.when(
             success: (TransactionSubmitBlobResult? obj) async {
           print(obj!.toJson().toString());
           submitResp = obj;
           expect(submitResp, isNotNull);
-        }, failure: (NetworkExceptions? error) {
+        }, failure: (ZetrixSDKExceptions? error) {
           submitResp = null;
         });
-      }, failure: (NetworkExceptions? error) {
+      }, failure: (ZetrixSDKExceptions? error) {
         signResp = null;
       });
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
   }, skip: true);
@@ -401,17 +392,19 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
 
-    await resp.when(success: (TransactionBuildBlobResp? obj) async {
+    await resp.when(success: (TransactionBuildBlobResult? obj) async {
       blobResp = obj;
 
       TransactionSignReq signReq = TransactionSignReq();
-      signReq.blob = blobResp!.result!.transactionBlob;
+      signReq.blob = blobResp!.transactionBlob;
       signReq.privateKeys = [privKey];
 
-      SDKResult<TransactionSignResult> respSign = await service.sign(signReq);
+      ZetrixSDKResult<TransactionSignResult> respSign =
+          await service.sign(signReq);
       TransactionSignResult? signResp;
       await respSign.when(success: (TransactionSignResult? obj) async {
         signResp = obj;
@@ -420,20 +413,20 @@ void main() {
         submitReq.signatures = signResp!.signatures!;
         submitReq.transactionBlob = signReq.blob;
 
-        SDKResult<TransactionSubmitBlobResult> respSubmit =
+        ZetrixSDKResult<TransactionSubmitBlobResult> respSubmit =
             await service.submit(submitReq);
         await respSubmit.when(
             success: (TransactionSubmitBlobResult? obj) async {
           print(obj!.toJson().toString());
           submitResp = obj;
           expect(submitResp, isNotNull);
-        }, failure: (NetworkExceptions? error) {
+        }, failure: (ZetrixSDKExceptions? error) {
           submitResp = null;
         });
-      }, failure: (NetworkExceptions? error) {
+      }, failure: (ZetrixSDKExceptions? error) {
         signResp = null;
       });
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
   }, skip: true);
@@ -459,17 +452,19 @@ void main() {
     operations.add(op);
     req.operations = operations;
 
-    SDKResult<TransactionBuildBlobResp> resp = await service.buildBlob(req);
-    TransactionBuildBlobResp? blobResp;
+    ZetrixSDKResult<TransactionBuildBlobResult> resp =
+        await service.buildBlob(req);
+    TransactionBuildBlobResult? blobResp;
 
-    await resp.when(success: (TransactionBuildBlobResp? obj) async {
+    await resp.when(success: (TransactionBuildBlobResult? obj) async {
       blobResp = obj;
 
       TransactionSignReq signReq = TransactionSignReq();
-      signReq.blob = blobResp!.result!.transactionBlob;
+      signReq.blob = blobResp!.transactionBlob;
       signReq.privateKeys = [privKey];
 
-      SDKResult<TransactionSignResult> respSign = await service.sign(signReq);
+      ZetrixSDKResult<TransactionSignResult> respSign =
+          await service.sign(signReq);
       TransactionSignResult? signResp;
       await respSign.when(success: (TransactionSignResult? obj) async {
         signResp = obj;
@@ -478,20 +473,20 @@ void main() {
         submitReq.signatures = signResp!.signatures!;
         submitReq.transactionBlob = signReq.blob;
 
-        SDKResult<TransactionSubmitBlobResult> respSubmit =
+        ZetrixSDKResult<TransactionSubmitBlobResult> respSubmit =
             await service.submit(submitReq);
         await respSubmit.when(
             success: (TransactionSubmitBlobResult? obj) async {
           print(obj!.toJson().toString());
           submitResp = obj;
           expect(submitResp, isNotNull);
-        }, failure: (NetworkExceptions? error) {
+        }, failure: (ZetrixSDKExceptions? error) {
           submitResp = null;
         });
-      }, failure: (NetworkExceptions? error) {
+      }, failure: (ZetrixSDKExceptions? error) {
         signResp = null;
       });
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       blobResp = null;
     });
   });
@@ -500,11 +495,11 @@ void main() {
     String hash =
         '33e3df28879dae5a8d9c6c4b0317a96005d458d503a1c72a2297af8cf53ca55b';
 
-    SDKResult<TransactionInfoResp> resp = await service.getInfo(hash);
-    TransactionInfoResp? infoResp;
+    ZetrixSDKResult<TransactionInfoResult> resp = await service.getInfo(hash);
+    TransactionInfoResult? infoResp;
     resp.when(success: (obj) {
       infoResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       infoResp = null;
     });
 

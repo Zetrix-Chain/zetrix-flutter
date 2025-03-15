@@ -3,34 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/network-exceptions.dart';
-import 'package:zetrix_flutter/src/models/transaction/sign-blob-resp.dart';
-import 'package:zetrix_flutter/src/models/transaction/sign-message-resp.dart';
-import 'package:zetrix_flutter/src/models/vc/apply/attribute-key-value.dart';
-import 'package:zetrix_flutter/src/models/vc/apply/vc-apply-req.dart';
-import 'package:zetrix_flutter/src/models/vc/apply/vc-apply-result.dart';
-import 'package:zetrix_flutter/src/models/vc/apply/vc-attribute-content.dart';
-import 'package:zetrix_flutter/src/models/vc/issue/vc-audit-blob-result.dart';
-import 'package:zetrix_flutter/src/models/vc/issue/vc-audit-submit-req.dart';
-import 'package:zetrix_flutter/src/models/vc/issue/vc-audit-submit-result.dart';
-import 'package:zetrix_flutter/src/models/vc/auth/vc-register-blob-req.dart';
-import 'package:zetrix_flutter/src/models/vc/auth/vc-register-blob-resp.dart';
-import 'package:zetrix_flutter/src/models/vc/auth/vc-register-submit-req.dart';
-import 'package:zetrix_flutter/src/models/vc/auth/vc-register-submit-resp.dart';
-import 'package:zetrix_flutter/src/models/vc/download/vc-download-req.dart';
-import 'package:zetrix_flutter/src/models/vc/download/vc-download-result.dart';
-import 'package:zetrix_flutter/src/models/vc/info/vc-info-req.dart';
-import 'package:zetrix_flutter/src/models/vc/info/vc-info-resp.dart';
-import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-blob-req.dart';
-import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-blob-result.dart';
-import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-req.dart';
-import 'package:zetrix_flutter/src/models/vc/vc-finalize-req.dart';
-import 'package:zetrix_flutter/src/models/vc/vc-finalize-resp.dart';
-import 'package:zetrix_flutter/src/models/vc/verify/vc-verification-result.dart';
-import 'package:zetrix_flutter/src/services/vc.service.dart';
-import 'package:zetrix_flutter/src/utils/sdk-error.enum.dart';
-import 'package:zetrix_flutter/src/utils/vp_jws.dart';
+import 'package:zetrix_flutter/src/models/vc/vc-finalize-result.dart';
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
@@ -74,7 +47,8 @@ void main() {
     VcRegisterBlobReq req = VcRegisterBlobReq();
     req.address = holder["address"];
 
-    SDKResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
+    ZetrixSDKResult<VcRegisterBlobResp> resp =
+        await service.getRegisterBlob(req);
 
     resp.when(success: (VcRegisterBlobResp? obj) {
       if (obj != null) {
@@ -82,7 +56,7 @@ void main() {
         holder["blob"] = finalResp!.blob!;
         holder["blobId"] = finalResp!.blobId!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -94,7 +68,7 @@ void main() {
   test('get token - holder', () async {
     VcRegisterSubmitResp? finalResp;
 
-    SignBlobResp signResp =
+    SignBlob signResp =
         await encryption.signBlob(holder["blob"], holder["privKey"]);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
@@ -105,14 +79,14 @@ void main() {
 
     holder["pubKey"] = signResp.publicKey!;
 
-    SDKResult<VcRegisterSubmitResp> submitResp =
+    ZetrixSDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
         finalResp = obj;
         holder["token"] = finalResp!.token!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -126,7 +100,8 @@ void main() {
     VcRegisterBlobReq req = VcRegisterBlobReq();
     req.address = issuer["address"];
 
-    SDKResult<VcRegisterBlobResp> resp = await service.getRegisterBlob(req);
+    ZetrixSDKResult<VcRegisterBlobResp> resp =
+        await service.getRegisterBlob(req);
 
     resp.when(success: (VcRegisterBlobResp? obj) {
       if (obj != null) {
@@ -134,7 +109,7 @@ void main() {
         issuer["blob"] = finalResp!.blob!;
         issuer["blobId"] = finalResp!.blobId!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -146,7 +121,7 @@ void main() {
   test('get token', () async {
     VcRegisterSubmitResp? finalResp;
 
-    SignBlobResp signResp =
+    SignBlob signResp =
         await encryption.signBlob(issuer["blob"], issuer["privKey"]);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
@@ -157,14 +132,14 @@ void main() {
 
     issuer["pubKey"] = signResp.publicKey!;
 
-    SDKResult<VcRegisterSubmitResp> submitResp =
+    ZetrixSDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
         finalResp = obj;
         issuer["token"] = finalResp!.token!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -175,7 +150,7 @@ void main() {
   test('get token - error signature', () async {
     VcRegisterSubmitResp? finalResp;
 
-    SignMessageResp signResp =
+    SignMessage signResp =
         await encryption.signMessage(holder["blob"], holder["privKey"]);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
@@ -184,13 +159,13 @@ void main() {
     req.publicKey = signResp.publicKey;
     req.address = holder["address"];
 
-    SDKResult<VcRegisterSubmitResp> submitResp =
+    ZetrixSDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
         finalResp = obj;
       }
-    }, failure: (NetworkExceptions? e) {
+    }, failure: (ZetrixSDKExceptions? e) {
       finalResp = null;
       var errMsg = e as DefaultError;
       expect(errMsg.error, "Transaction signature error");
@@ -202,7 +177,7 @@ void main() {
   test('get token - error invalid param', () async {
     VcRegisterSubmitResp? finalResp;
 
-    SignBlobResp signResp =
+    SignBlob signResp =
         await encryption.signBlob(holder["blob"], holder["privKey"]);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
@@ -210,13 +185,13 @@ void main() {
     req.blobSign = signResp.signBlob;
     req.publicKey = signResp.publicKey;
 
-    SDKResult<VcRegisterSubmitResp> submitResp =
+    ZetrixSDKResult<VcRegisterSubmitResp> submitResp =
         await service.getRegisterToken(req);
     await submitResp.when(success: (VcRegisterSubmitResp? obj) async {
       if (obj != null) {
         finalResp = obj;
       }
-    }, failure: (NetworkExceptions? e) {
+    }, failure: (ZetrixSDKExceptions? e) {
       finalResp = null;
       var errMsg = e as DefaultError;
       expect(errMsg.error, SdkError.invalidParameter.toString());
@@ -250,7 +225,7 @@ void main() {
     req.templateId = "ZTX3JdX5Mi6wsByrPoXvTZXwdaEuKfbtk3Lux";
     req.publicKey = holder["pubKey"];
 
-    SDKResult<VcApplyResult> resp =
+    ZetrixSDKResult<VcApplyResult> resp =
         await service.applyVc(holder["token"]!, req);
 
     resp.when(success: (VcApplyResult? obj) {
@@ -261,7 +236,7 @@ void main() {
         }
         apply['applyNo'] = finalResp!.applyNo!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -271,7 +246,7 @@ void main() {
   test('vc issue blob', () async {
     VcAuditBlobResult? finalResp;
 
-    SDKResult<VcAuditBlobResult> resp =
+    ZetrixSDKResult<VcAuditBlobResult> resp =
         await service.issueVcBlob(issuer["token"]!, apply['applyNo']!);
 
     resp.when(success: (VcAuditBlobResult? obj) {
@@ -284,7 +259,7 @@ void main() {
         apply["payloadId"] = finalResp!.payloadId!;
         apply["bcTxBlob"] = finalResp!.bcTxBlob!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -294,10 +269,10 @@ void main() {
   test('vc issue submit', () async {
     VcAuditSubmitResult? finalResp;
 
-    SignBlobResp signBcTxBlob =
+    SignBlob signBcTxBlob =
         await encryption.signBlob(apply["bcTxBlob"], issuer["privKey"]);
 
-    SignMessageResp signPayload =
+    SignMessage signPayload =
         await encryption.signMessage(apply["payload"], issuer["privKey"]);
 
     VcAuditSubmitReq req = VcAuditSubmitReq();
@@ -307,7 +282,7 @@ void main() {
     req.publicKey = signPayload.publicKey;
     req.border = 0;
 
-    SDKResult<VcAuditSubmitResult> resp =
+    ZetrixSDKResult<VcAuditSubmitResult> resp =
         await service.issueVcSubmit(issuer["token"]!, req);
 
     resp.when(success: (VcAuditSubmitResult? obj) {
@@ -318,7 +293,7 @@ void main() {
         }
         vc["vcId"] = finalResp!.did!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -334,7 +309,8 @@ void main() {
     req.pageSize = 10;
     req.status = 0;
 
-    SDKResult<VcInfoResp> resp = await service.getVcList(holder["token"]!, req);
+    ZetrixSDKResult<VcInfoResp> resp =
+        await service.getVcList(holder["token"]!, req);
 
     resp.when(success: (VcInfoResp? obj) {
       if (obj != null) {
@@ -344,7 +320,7 @@ void main() {
           print(finalResp!.rows!.first.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -358,7 +334,7 @@ void main() {
     req.userAddress = holder["address"];
     req.credentialId = vc["vcId"];
 
-    SDKResult<VcDownloadResult> resp =
+    ZetrixSDKResult<VcDownloadResult> resp =
         await service.downloadVc(holder["token"]!, req);
 
     resp.when(success: (VcDownloadResult? obj) {
@@ -370,7 +346,7 @@ void main() {
         vc['jws'] = finalResp!.jws;
         vc['vcContent'] = finalResp!.vc;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -402,7 +378,7 @@ void main() {
     req.templateId = "ZTX3JdX5Mi6wsByrPoXvTZXwdaEuKfbtk3Lux";
     req.publicKey = holder["pubKey"];
 
-    SDKResult<VcApplyResult> resp =
+    ZetrixSDKResult<VcApplyResult> resp =
         await service.applyVc(holder["token"]!, req);
 
     resp.when(success: (VcApplyResult? obj) {
@@ -413,7 +389,7 @@ void main() {
         }
         apply['applyNo'] = finalResp!.applyNo!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -423,14 +399,14 @@ void main() {
   test('vc reject', () async {
     bool? finalResp;
 
-    SDKResult<bool> resp = await service.rejectVc(
+    ZetrixSDKResult<bool> resp = await service.rejectVc(
         issuer["token"]!, issuer['address']!, apply['applyNo']!);
 
     resp.when(success: (bool? obj) {
       if (obj != null) {
         finalResp = obj;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -447,7 +423,7 @@ void main() {
     req.contentAssert = json.encode(contentAssert);
     req.jws = vc['jws'];
 
-    SDKResult<VcGenerateQrBlobResult> resp =
+    ZetrixSDKResult<VcGenerateQrBlobResult> resp =
         await service.generateQrBlob(holder["token"]!, req);
 
     resp.when(success: (VcGenerateQrBlobResult? obj) {
@@ -459,7 +435,7 @@ void main() {
         verify["blob"] = finalResp!.blob!;
         verify["blobId"] = finalResp!.blobId!;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -469,7 +445,7 @@ void main() {
   test('vc qr code generation submit', () async {
     String qrCode = "";
 
-    SignBlobResp sign =
+    SignBlob sign =
         await encryption.signBlob(verify["blob"], holder["privKey"]);
 
     VcGenerateQrReq req = VcGenerateQrReq();
@@ -478,7 +454,7 @@ void main() {
     req.publicKey = sign.publicKey;
     req.userAddress = "";
 
-    SDKResult<String> resp =
+    ZetrixSDKResult<String> resp =
         await service.generateQrSubmit(holder["token"]!, req);
 
     resp.when(success: (String? obj) {
@@ -489,7 +465,7 @@ void main() {
         }
         verify["qrCode"] = qrCode;
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       qrCode = "";
     });
 
@@ -499,7 +475,7 @@ void main() {
   test('vc verify using qrcode', () async {
     VcVerificationResult? finalResp;
 
-    SDKResult<VcVerificationResult> resp =
+    ZetrixSDKResult<VcVerificationResult> resp =
         await service.verifyQrCode(verify['qrCode']!);
 
     resp.when(success: (VcVerificationResult? obj) {
@@ -509,7 +485,7 @@ void main() {
           print(finalResp?.toJson().toString());
         }
       }
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       finalResp = null;
     });
 
@@ -528,13 +504,13 @@ void main() {
     var needSignStr = await vcJws.signJws(req.vc ?? '');
     req.vcjws = await vcJws.buildJws(needSignStr, signStr);
 
-    SDKResult<VcFinalizeResp> resp = await service.signedVc(req);
+    ZetrixSDKResult<VcFinalizeResult> resp = await service.signedVc(req);
 
-    VcFinalizeResp? vcGetTokenResp;
+    VcFinalizeResult? vcGetTokenResp;
 
     resp.when(success: (obj) async {
       vcGetTokenResp = obj;
-    }, failure: (NetworkExceptions? error) {
+    }, failure: (ZetrixSDKExceptions? error) {
       print(error);
       vcGetTokenResp = null;
       if (kDebugMode) {}

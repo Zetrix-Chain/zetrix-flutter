@@ -11,13 +11,9 @@ VpGenerateResp _$VpGenerateRespFromJson(Map<String, dynamic> json) =>
       vp: json['vp'] == null
           ? null
           : VerifiablePresentation.fromJson(json['vp'] as Map<String, dynamic>),
-    )
-      ..errorCode = (json['error_code'] as num?)?.toInt()
-      ..errorDesc = json['error_desc'] as String?;
+    );
 
 Map<String, dynamic> _$VpGenerateRespToJson(VpGenerateResp instance) =>
     <String, dynamic>{
-      'error_code': instance.errorCode,
-      'error_desc': instance.errorDesc,
       'vp': instance.vp,
     };

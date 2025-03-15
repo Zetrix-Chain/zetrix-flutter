@@ -1,12 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zetrix_flutter/src/models/vp/vp-presentation.dart';
 
-import '../base-response.dart';
-
 part 'vp-generate-resp.g.dart';
 
 @JsonSerializable()
-class VpGenerateResp extends BaseResponse {
+class VpGenerateResp {
   VerifiablePresentation? vp;
 
   VpGenerateResp({this.vp});

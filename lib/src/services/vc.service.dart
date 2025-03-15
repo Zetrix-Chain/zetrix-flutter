@@ -2,21 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:zetrix_flutter/src/models/sdk-result.dart';
-import 'package:zetrix_flutter/src/models/network-exceptions.dart';
+import 'package:zetrix_flutter/src/models/sdk-exceptions.dart';
 import 'package:zetrix_flutter/src/models/vc/apply/vc-apply-req.dart';
 import 'package:zetrix_flutter/src/models/vc/info/vc-info-req.dart';
 import 'package:zetrix_flutter/src/models/vc/info/vc-info-resp.dart';
 import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-blob-req.dart';
 import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-req.dart';
 import 'package:zetrix_flutter/src/models/vc/vc-finalize-req.dart';
-import 'package:zetrix_flutter/src/models/vc/vc-finalize-resp.dart';
 import 'package:zetrix_flutter/src/models/vp/vc-vp-proof.dart';
 import 'package:zetrix_flutter/src/services/base_cred.service.dart';
 import 'package:zetrix_flutter/src/utils/tools.dart';
 
 import 'package:zetrix_flutter/src/models/vc/apply/vc-apply-req-str.dart';
 import 'package:zetrix_flutter/src/models/vc/apply/vc-apply-result.dart';
-import 'package:zetrix_flutter/src/models/vc/vc-general-resp.dart';
 import 'package:zetrix_flutter/src/models/vc/auth/vc-register-blob-req.dart';
 import 'package:zetrix_flutter/src/models/vc/auth/vc-register-blob-resp.dart';
 import 'package:zetrix_flutter/src/models/vc/auth/vc-register-submit-req.dart';
@@ -29,11 +27,14 @@ import 'package:zetrix_flutter/src/models/vc/issue/vc-audit-submit-result.dart';
 import 'package:zetrix_flutter/src/models/vc/qr/vc-generateqr-blob-result.dart';
 import 'package:zetrix_flutter/src/models/vc/vc-general-string-resp.dart';
 import 'package:zetrix_flutter/src/models/vc/verify/vc-verification-result.dart';
+import '../models/vc/vc-finalize-result.dart';
+import '../models/vc/vc-general-resp.dart';
 import '../utils/sdk-error.enum.dart';
 import '../utils/secure_storage.dart';
 
 class ZetrixVcService extends BaseCredService {
-  ZetrixVcService(bool mainnet) : super(mainnet);
+  ZetrixVcService(super.mainnet);
+
   final secureStorage = SecureStorage();
 
   /// Generate blob for token generation
@@ -41,12 +42,12 @@ class ZetrixVcService extends BaseCredService {
   /// [req]: wallet address object for token generation
   ///
   /// Return blob to sign
-  Future<SDKResult<VcRegisterBlobResp>> getRegisterBlob(
+  Future<ZetrixSDKResult<VcRegisterBlobResp>> getRegisterBlob(
       VcRegisterBlobReq req) async {
     String url = basePrefix() + '/api/register/getBlob';
 
     if (!Tools.validateParams(req.toJson())) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.invalidParameter.toString()));
     }
 
@@ -62,9 +63,9 @@ class ZetrixVcService extends BaseCredService {
                   VcRegisterBlobResp.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -72,7 +73,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -81,12 +83,12 @@ class ZetrixVcService extends BaseCredService {
   /// [req]: object for token generation
   ///
   /// Return token
-  Future<SDKResult<VcRegisterSubmitResp>> getRegisterToken(
+  Future<ZetrixSDKResult<VcRegisterSubmitResp>> getRegisterToken(
       VcRegisterSubmitReq req) async {
     String url = basePrefix() + '/api/register/getToken';
 
     if (!Tools.validateParams(req.toJson())) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.invalidParameter.toString()));
     }
 
@@ -103,9 +105,9 @@ class ZetrixVcService extends BaseCredService {
                   VcRegisterSubmitResp.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -113,7 +115,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -123,17 +126,17 @@ class ZetrixVcService extends BaseCredService {
   ///  [req]: object for VC application
   ///
   /// Return VC application number
-  Future<SDKResult<VcApplyResult>> applyVc(
+  Future<ZetrixSDKResult<VcApplyResult>> applyVc(
       String accessToken, VcApplyReq req) async {
     String url = basePrefix() + '/api/vc/apply';
 
     if (Tools.isEmptyString(accessToken)) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.tokenNotExist.toString()));
     }
 
     if (!Tools.validateParams(req.toJson())) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.invalidParameter.toString()));
     }
 
@@ -151,13 +154,13 @@ class ZetrixVcService extends BaseCredService {
               (json) => VcApplyResult.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -165,7 +168,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -175,12 +179,12 @@ class ZetrixVcService extends BaseCredService {
   ///  [req]: object for VC list
   ///
   /// Return VC list
-  Future<SDKResult<VcInfoResp>> getVcList(
+  Future<ZetrixSDKResult<VcInfoResp>> getVcList(
       String accessToken, VcInfoReq req) async {
     String url = '/api/wallet/vc/simple/list';
 
     if (Tools.isEmptyString(accessToken)) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.tokenNotExist.toString()));
     }
 
@@ -193,13 +197,13 @@ class ZetrixVcService extends BaseCredService {
               (json) => VcInfoResp.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -207,7 +211,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -217,12 +222,12 @@ class ZetrixVcService extends BaseCredService {
   ///  [req]: object for VC download
   ///
   /// Return jws, vc, issuerBid, issuerAddress
-  Future<SDKResult<VcDownloadResult>> downloadVc(
+  Future<ZetrixSDKResult<VcDownloadResult>> downloadVc(
       String accessToken, VcDownloadReq req) async {
     String url = '/api/wallet/vc/download';
 
     if (Tools.isEmptyString(accessToken)) {
-      return SDKResult.failure(
+      return ZetrixSDKResult.failure(
           error: DefaultError(SdkError.tokenNotExist.toString()));
     }
 
@@ -240,13 +245,13 @@ class ZetrixVcService extends BaseCredService {
         // await secureStorage.writeSecureData(
         //     wrappedResp.data!.vcId!, wrappedResp.data!.toJson().toString());
 
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -254,7 +259,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -264,7 +270,7 @@ class ZetrixVcService extends BaseCredService {
   ///  [apply]: application number to issue
   ///
   /// Return payload, payloadId and bcTxBlob to sign
-  Future<SDKResult<VcAuditBlobResult>> issueVcBlob(
+  Future<ZetrixSDKResult<VcAuditBlobResult>> issueVcBlob(
       String accessToken, String applyNo) async {
     String url = basePrefix() + '/api/vc/audit/blob';
 
@@ -281,13 +287,13 @@ class ZetrixVcService extends BaseCredService {
                   VcAuditBlobResult.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -295,7 +301,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -305,7 +312,7 @@ class ZetrixVcService extends BaseCredService {
   ///  [req]: signed object for VC issuance
   ///
   /// Return VC ID
-  Future<SDKResult<VcAuditSubmitResult>> issueVcSubmit(
+  Future<ZetrixSDKResult<VcAuditSubmitResult>> issueVcSubmit(
       String accessToken, VcAuditSubmitReq req) async {
     String url = basePrefix() + '/api/vc/audit/submit';
 
@@ -320,13 +327,13 @@ class ZetrixVcService extends BaseCredService {
                   VcAuditSubmitResult.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -334,7 +341,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -344,7 +352,7 @@ class ZetrixVcService extends BaseCredService {
   ///  [apply]: application number to issue
   ///
   /// Return payload, payloadId and bcTxBlob to sign
-  Future<SDKResult<bool>> rejectVc(
+  Future<ZetrixSDKResult<bool>> rejectVc(
       String accessToken, String issuerAddress, String applyNo) async {
     String url = '/api/vc/audit/disApprove';
 
@@ -363,13 +371,13 @@ class ZetrixVcService extends BaseCredService {
           VcGeneralResp<void>.fromJson(response.data, (json) {});
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.message == "SUCCESS");
+        return ZetrixSDKResult.success(data: wrappedResp.message == "SUCCESS");
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -377,7 +385,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -388,7 +397,7 @@ class ZetrixVcService extends BaseCredService {
   ///
   /// Return blob and blobId to sign
   @Deprecated('Use VP service')
-  Future<SDKResult<VcGenerateQrBlobResult>> generateQrBlob(
+  Future<ZetrixSDKResult<VcGenerateQrBlobResult>> generateQrBlob(
       String accessToken, VcGenerateQrBlobReq req) async {
     var url = '/api/wallet/vp/qr/blob';
 
@@ -403,13 +412,13 @@ class ZetrixVcService extends BaseCredService {
                   json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -417,7 +426,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -428,7 +438,7 @@ class ZetrixVcService extends BaseCredService {
   ///
   /// Return qrCode string
   @Deprecated('Use VP service')
-  Future<SDKResult<String>> generateQrSubmit(
+  Future<ZetrixSDKResult<String>> generateQrSubmit(
       String accessToken, VcGenerateQrReq req) async {
     var url = '/api/wallet/vp/qr/create';
 
@@ -440,13 +450,13 @@ class ZetrixVcService extends BaseCredService {
           VcGeneralStringResp.fromJson(response.data);
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -454,7 +464,8 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
@@ -464,7 +475,8 @@ class ZetrixVcService extends BaseCredService {
   ///
   /// Return qrCode string
   @Deprecated('Use VP service')
-  Future<SDKResult<VcVerificationResult>> verifyQrCode(String qrCode) async {
+  Future<ZetrixSDKResult<VcVerificationResult>> verifyQrCode(
+      String qrCode) async {
     var url = '/api/wallet/vp/verify';
 
     try {
@@ -478,13 +490,13 @@ class ZetrixVcService extends BaseCredService {
                   VcVerificationResult.fromJson(json as Map<String, dynamic>));
 
       if (wrappedResp.errorCode == SdkError.success.code) {
-        return SDKResult.success(data: wrappedResp.data);
+        return ZetrixSDKResult.success(data: wrappedResp.data);
       } else if (wrappedResp.errorCode == SdkError.accessTokenInvalid.code) {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.accessTokenInvalid.toString()));
       } else {
-        return SDKResult.failure(
+        return ZetrixSDKResult.failure(
             error: DefaultError(
                 wrappedResp.message ?? SdkError.resultNotFound.toString()));
       }
@@ -492,11 +504,12 @@ class ZetrixVcService extends BaseCredService {
       if (kDebugMode) {
         print(e);
       }
-      return SDKResult.failure(error: NetworkExceptions.getDioException(e));
+      return ZetrixSDKResult.failure(
+          error: ZetrixSDKExceptions.getDioException(e));
     }
   }
 
-  Future<SDKResult<VcFinalizeResp>> signedVc(VcFinalizeReq req) async {
+  Future<ZetrixSDKResult<VcFinalizeResult>> signedVc(VcFinalizeReq req) async {
     var signedVc = jsonDecode(req.vc ?? '');
 
     // Add proof
@@ -510,9 +523,9 @@ class ZetrixVcService extends BaseCredService {
     signedVc['proof'] = vcProof.toJson();
 
     // Create the VP response
-    final vcResp = VcFinalizeResp(vc: jsonEncode(signedVc));
+    final vcResp = VcFinalizeResult(vc: jsonEncode(signedVc));
 
     // Return the API result
-    return SDKResult.success(data: vcResp);
+    return ZetrixSDKResult.success(data: vcResp);
   }
 }

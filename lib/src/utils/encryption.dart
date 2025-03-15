@@ -4,19 +4,19 @@ import 'package:pinenacl/digests.dart';
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
 import 'package:pinenacl/ed25519.dart';
-import 'package:zetrix_flutter/src/models/account/create-account-result.dart';
-import 'package:zetrix_flutter/src/models/transaction/sign-message-resp.dart';
-import 'package:zetrix_flutter/src/models/transaction/sign-blob-resp.dart';
+import 'package:zetrix_flutter/src/models/account/create-account.dart';
+import 'package:zetrix_flutter/src/models/transaction/sign-message.dart';
+import 'package:zetrix_flutter/src/models/transaction/sign-blob.dart';
 
 class Encryption {
-  Future<CreateAccountResult> generateKeyPair() async {
+  Future<CreateAccount> generateKeyPair() async {
     Uint8List rawPrivateKey = PineNaClUtils.randombytes(32);
 
     String privateKey = generatePrivateKey(rawPrivateKey);
     String publicKey = await generatePublicKey(rawPrivateKey);
     String address = getAddress(publicKey);
 
-    CreateAccountResult keypair = CreateAccountResult();
+    CreateAccount keypair = CreateAccount();
     keypair.privateKey = privateKey;
     keypair.publicKey = publicKey;
     keypair.address = address;
@@ -261,7 +261,7 @@ class Encryption {
     return rawPub;
   }
 
-  Future<SignBlobResp> signBlob(msg, privateKey) async {
+  Future<SignBlob> signBlob(msg, privateKey) async {
     if (msg.isEmpty || privateKey.isEmpty) {
       throw Exception('require message or encPrivateKey');
     }
@@ -281,14 +281,14 @@ class Encryption {
       keyPair: keyPair,
     );
 
-    SignBlobResp resp = SignBlobResp();
+    SignBlob resp = SignBlob();
     resp.publicKey = await getEncPublicKey(privateKey);
     resp.signBlob = HEX.encode(signature.bytes);
 
     return resp;
   }
 
-  Future<SignMessageResp> signMessage(msg, privateKey) async {
+  Future<SignMessage> signMessage(msg, privateKey) async {
     if (msg.isEmpty || privateKey.isEmpty) {
       throw Exception('require message or encPrivateKey');
     }
@@ -308,7 +308,7 @@ class Encryption {
       keyPair: keyPair,
     );
 
-    SignMessageResp resp = SignMessageResp();
+    SignMessage resp = SignMessage();
     resp.publicKey = await getEncPublicKey(privateKey);
     resp.signData = HEX.encode(signature.bytes);
 
