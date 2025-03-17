@@ -34,6 +34,10 @@ export 'operations/log-create-operation.dart';
 /* Chain models */
 export 'block/block-number.dart';
 
+/* Contract models */
+export 'contract/contract-call-req.dart';
+export 'contract/contract-call-result.dart';
+
 /* Transaction models */
 export 'transaction/req/transaction-build-blob-req.dart';
 export 'transaction/req/transaction-sign-req.dart';

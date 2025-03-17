@@ -1,3 +1,8 @@
+## 0.0.6
+
+### Added
+- Add contract module
+
 ## 0.0.5
 
 ### Changed
