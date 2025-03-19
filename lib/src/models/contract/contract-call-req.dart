@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zetrix_flutter/src/models/operations/base-operation.dart';
 
 part 'contract-call-req.g.dart';
 
