@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:zetrix_flutter/src/models/chain/operation.dart';
-import 'package:zetrix_flutter/src/models/common/signature.dart';
 
 part 'transaction-detail.g.dart';
 
