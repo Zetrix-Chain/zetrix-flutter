@@ -1,3 +1,8 @@
+## 0.0.7
+
+### Changed
+- Fix transaction submit module
+
 ## 0.0.6
 
 ### Added

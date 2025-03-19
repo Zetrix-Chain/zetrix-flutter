@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:zetrix_flutter/src/models/base-response-submit.dart';
 import 'package:zetrix_flutter/src/models/base-response.dart';
 import 'package:zetrix_flutter/src/models/common/signature.dart';
 import 'package:zetrix_flutter/src/models/operations/build-blob.dart';
@@ -129,21 +130,19 @@ class ZetrixTransactionService extends BaseNodeService {
 
       print(response);
 
-      BaseResponse<TransactionSubmitBlobResult> resp =
-          BaseResponse<TransactionSubmitBlobResult>.fromJson(
-        response.data,
-        (json) =>
-            TransactionSubmitBlobResult.fromJson(json as Map<String, dynamic>),
-      );
+      BaseResponseSubmit resp = BaseResponseSubmit.fromJson(response.data);
 
-      if (resp.errorCode == SdkError.success.code) {
+      print(resp.results);
+
+      if (resp.results!.isNotEmpty &&
+          resp.results![0].errorCode == SdkError.success.code) {
         TransactionSubmitBlobResult result = TransactionSubmitBlobResult();
-        result.hash = resp.result!.hash;
+        result.hash = resp.results![0].hash;
         return ZetrixSDKResult.success(data: result);
       } else {
         return ZetrixSDKResult.failure(
-            error: DefaultError(
-                resp.errorDesc ?? SdkError.resultNotFound.toString()));
+            error: DefaultError(resp.results![0].errorDesc ??
+                SdkError.resultNotFound.toString()));
       }
     } catch (e) {
       if (kDebugMode) {
@@ -163,6 +162,8 @@ class ZetrixTransactionService extends BaseNodeService {
 
     try {
       final response = await dio.get(url, queryParameters: {'hash': hash});
+
+      print(response);
 
       BaseResponse<TransactionInfoResult> resp =
           BaseResponse<TransactionInfoResult>.fromJson(

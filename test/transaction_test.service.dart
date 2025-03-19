@@ -5,8 +5,8 @@ import 'package:zetrix_flutter/zetrix_flutter.dart';
 void main() {
   final service = ZetrixTransactionService(false);
 
-  String privKey = "";
-  String zetrixAddr = "";
+  String privKey = "privBzQfE8ydCo7NS3wPDf17ooPdUdPCnDGGJvFQBbQ8RLXxVRgwR72F";
+  String zetrixAddr = "ZTX3XDeQk86zpZqM7k2xCBDD75oZ7gk3M3Gnc";
 
   test('creating blob for account creation', () async {
     TransactionBuildBlobReq req = TransactionBuildBlobReq();
@@ -436,7 +436,7 @@ void main() {
     TransactionSubmitBlobResult? submitResp;
 
     req.sourceAddress = zetrixAddr;
-    req.nonce = 2023;
+    req.nonce = 2059;
     req.feeLimit = 35892000;
     req.gasPrice = 10;
     req.metadata = "";
@@ -448,7 +448,7 @@ void main() {
     op.ztxAmount = 0;
     op.contractAddress = "ZTX3aymXGbrB7DtiDGkdivkS1Q3rYkcC9kucv";
     op.input =
-        '{"method": "transfer", "params": {"to": "ZTX3WYnW6rJPMZ3dg6Brhcikd73dy7eMccFPY", "value": "1000"}}';
+        '{"method": "transfer", "params": {"to": "ZTX3WYnW6rJPMZ3dg6Brhcikd73dy7eMccFPY", "value": "1"}}';
     operations.add(op);
     req.operations = operations;
 
@@ -479,7 +479,7 @@ void main() {
             success: (TransactionSubmitBlobResult? obj) async {
           print(obj!.toJson().toString());
           submitResp = obj;
-          expect(submitResp, isNotNull);
+          expect(submitResp!.hash, isNotNull);
         }, failure: (ZetrixSDKExceptions? error) {
           submitResp = null;
         });
@@ -498,6 +498,7 @@ void main() {
     ZetrixSDKResult<TransactionInfoResult> resp = await service.getInfo(hash);
     TransactionInfoResult? infoResp;
     resp.when(success: (obj) {
+      print(obj?.toJson().toString());
       infoResp = obj;
     }, failure: (ZetrixSDKExceptions? error) {
       infoResp = null;

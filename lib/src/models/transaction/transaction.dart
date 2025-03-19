@@ -1,13 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:zetrix_flutter/src/models/common/signature.dart';
+import 'package:zetrix_flutter/src/models/transaction/transaction-detail.dart';
 
 part 'transaction.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Transaction {
-  @JsonKey(name: "total_count")
-  int? totalCount;
-
+class Transaction extends JsonSerializable {
   @JsonKey(name: "actual_fee")
   int? actualFee;
 
@@ -21,10 +19,10 @@ class Transaction {
   int? errorCode;
 
   @JsonKey(name: "error_desc")
-  int? errorDesc;
+  String? errorDesc;
 
   @JsonKey(name: "hash")
-  int? hash;
+  String? hash;
 
   @JsonKey(name: "ledger_seq")
   int? ledgerSeq;
@@ -32,16 +30,19 @@ class Transaction {
   @JsonKey(name: "signatures")
   List<Signature>? signatures;
 
+  @JsonKey(name: "transaction")
+  TransactionDetail? transaction;
+
   @JsonKey(name: "tx_size")
   int? txSize;
 
   Transaction(
-      {this.totalCount,
-      this.actualFee,
+      {this.actualFee,
       this.closeTime,
       this.contractTxHashes,
       this.errorCode,
       this.errorDesc,
+      this.transaction,
       this.hash,
       this.ledgerSeq,
       this.signatures,

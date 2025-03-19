@@ -7,12 +7,12 @@ void main() {
   test('Create account', () async {
     ContractCallReq req = ContractCallReq();
     req.sourceAddress = "ZTX3XDeQk86zpZqM7k2xCBDD75oZ7gk3M3Gnc";
-    req.contractAddress = "ZTX3aymXGbrB7DtiDGkdivkS1Q3rYkcC9kucv";
+    req.contractAddress = "ZTX3LUP4Lwy3XLBcRhUSojXha1Zy3K1sXuCyY";
     req.optType = 2;
     req.feeLimit = 1000000;
     req.gasPrice = 10;
     req.input =
-        '{"method": "balanceOf", "params": {"address":"ZTX3XDeQk86zpZqM7k2xCBDD75oZ7gk3M3Gnc"}}';
+        '{"method": "getAllTasks", "params": {"status":"None"}}';
     Object? finalResp;
     ZetrixSDKResult<ContractCallResult> resp = await service.call(req);
 

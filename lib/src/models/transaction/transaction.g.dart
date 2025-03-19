@@ -7,13 +7,15 @@ part of 'transaction.dart';
 // **************************************************************************
 
 Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
-      totalCount: (json['total_count'] as num?)?.toInt(),
       actualFee: (json['actual_fee'] as num?)?.toInt(),
       closeTime: (json['close_time'] as num?)?.toInt(),
       contractTxHashes: (json['contract_tx_hashes'] as num?)?.toInt(),
       errorCode: (json['error_code'] as num?)?.toInt(),
-      errorDesc: (json['error_desc'] as num?)?.toInt(),
-      hash: (json['hash'] as num?)?.toInt(),
+      errorDesc: json['error_desc'] as String?,
+      transaction: json['transaction'] == null
+          ? null
+          : TransactionDetail.fromJson(json['transaction']),
+      hash: json['hash'] as String?,
       ledgerSeq: (json['ledger_seq'] as num?)?.toInt(),
       signatures: (json['signatures'] as List<dynamic>?)
           ?.map((e) => Signature.fromJson(e as Map<String, dynamic>))
@@ -23,7 +25,6 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
 
 Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
     <String, dynamic>{
-      'total_count': instance.totalCount,
       'actual_fee': instance.actualFee,
       'close_time': instance.closeTime,
       'contract_tx_hashes': instance.contractTxHashes,
@@ -32,5 +33,6 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'hash': instance.hash,
       'ledger_seq': instance.ledgerSeq,
       'signatures': instance.signatures?.map((e) => e.toJson()).toList(),
+      'transaction': instance.transaction?.toJson(),
       'tx_size': instance.txSize,
     };
