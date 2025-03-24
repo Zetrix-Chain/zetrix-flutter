@@ -1,3 +1,8 @@
+## 0.0.8
+
+### Changed
+- Change nonce starting value to 0
+
 ## 0.0.7
 
 ### Changed

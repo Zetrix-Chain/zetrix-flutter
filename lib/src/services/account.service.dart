@@ -100,14 +100,14 @@ class ZetrixAccountService extends BaseNodeService {
   Future<ZetrixSDKResult<AccountNonce>> getNonce(String address) async {
     ZetrixSDKResult<AccountInfo> accountResp = await getAccountInfo(address);
     AccountNonce resp = AccountNonce();
-    int nonce = 1;
+    int nonce = 0;
 
     accountResp.when(success: (AccountInfo? obj) {
       if (obj != null && obj.nonce != null) {
         nonce = obj.nonce!;
       }
     }, failure: (ZetrixSDKExceptions? error) {
-      nonce = 1;
+      nonce = 0;
     });
 
     resp.nonce = nonce;
