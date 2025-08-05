@@ -10,10 +10,10 @@ This Flutter plugin provides an API for querying information about an applicatio
 
 ## Requirements
 
-- Flutter >=3.19.0
+- Flutter >= 3.32.4
 - Dart >=3.3.0 <4.0.0
-- iOS >=12.0
-- MacOS >=10.14
+- iOS >= 12.0
+- MacOS >= 10.14
 - Android `compileSDK` 34
 - Java 17
 - Android Gradle Plugin >=8.3.0
