@@ -17,5 +17,4 @@ class BaseResponseSubmit extends JsonSerializable {
   factory BaseResponseSubmit.fromJson(Map<String, dynamic> json) =>
       _$BaseResponseSubmitFromJson(json);
   Map<String, dynamic> toJson() => _$BaseResponseSubmitToJson(this);
-
 }

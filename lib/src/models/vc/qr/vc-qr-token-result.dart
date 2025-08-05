@@ -7,9 +7,7 @@ class VcQrTokenResult {
   @JsonKey(name: "accessToken")
   String? accessToken;
 
-  VcQrTokenResult({
-    this.accessToken
-  });
+  VcQrTokenResult({this.accessToken});
 
   factory VcQrTokenResult.fromJson(Map<String, dynamic> json) =>
       _$VcQrTokenResultFromJson(json);

@@ -70,7 +70,6 @@ class ZetrixService {
 
     ZetrixSDKResult<TransactionBuildBlobResult> result =
         await transactionService.buildBlob(req);
-    TransactionBuildBlobResult? blobResp;
     return result.when(
       success: (data) => data!,
       failure: (error) {
@@ -89,7 +88,6 @@ class ZetrixService {
     req.feeLimit = 1000000;
     req.gasPrice = 10;
     req.input = '{"method": "getAllTasks", "params": {"status":"None"}}';
-    Object? finalResp;
     ZetrixSDKResult<ContractCallResult> resp = await contractService.call(req);
 
     return resp.when(

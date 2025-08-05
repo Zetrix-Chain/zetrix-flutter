@@ -19,7 +19,6 @@ class VpJws {
   }
 
   Future<String> buildJws(String needSignStr, String signStr) async {
-    
     // Signed String
     return '$needSignStr.$signStr';
   }

@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
-
   test('test gasToUGas', () async {
     String result = Utils.gasToUGas('123.12312312');
     expect(result, isNot(''));

@@ -4,8 +4,7 @@ part 'vc-generateqr-req.g.dart';
 
 @JsonSerializable()
 class VcGenerateQrReq {
-
-   @JsonKey(name: "blobId")
+  @JsonKey(name: "blobId")
   String? blobId;
 
   @JsonKey(name: "signBlob")
@@ -18,11 +17,11 @@ class VcGenerateQrReq {
   String? userAddress;
 
   VcGenerateQrReq({
-      this.blobId,
-      this.signBlob,
-      this.publicKey,
-      this.userAddress,
-      });
+    this.blobId,
+    this.signBlob,
+    this.publicKey,
+    this.userAddress,
+  });
 
   factory VcGenerateQrReq.fromJson(Map<String, dynamic> json) =>
       _$VcGenerateQrReqFromJson(json);

@@ -4,13 +4,10 @@ part 'vc-download-token-result.g.dart';
 
 @JsonSerializable()
 class VcDownloadTokenResult {
-
   @JsonKey(name: "accessToken")
   String? accessToken;
 
-  VcDownloadTokenResult({
-      this.accessToken
-  });
+  VcDownloadTokenResult({this.accessToken});
 
   factory VcDownloadTokenResult.fromJson(Map<String, dynamic> json) =>
       _$VcDownloadTokenResultFromJson(json);

@@ -4,13 +4,10 @@ part 'vc-register-blob-req.g.dart';
 
 @JsonSerializable()
 class VcRegisterBlobReq {
-
   @JsonKey(name: "address")
   String? address;
 
-  VcRegisterBlobReq({
-    this.address
-  });
+  VcRegisterBlobReq({this.address});
 
   factory VcRegisterBlobReq.fromJson(Map<String, dynamic> json) =>
       _$VcRegisterBlobReqFromJson(json);

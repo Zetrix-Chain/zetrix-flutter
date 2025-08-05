@@ -4,7 +4,6 @@ part 'vc-audit-blob-result.g.dart';
 
 @JsonSerializable()
 class VcAuditBlobResult {
-
   @JsonKey(name: "payload")
   String? payload;
 
@@ -14,12 +13,7 @@ class VcAuditBlobResult {
   @JsonKey(name: "bcTxBlob")
   String? bcTxBlob;
 
-
-  VcAuditBlobResult({
-      this.payload,
-      this.payloadId,
-      this.bcTxBlob
-      });
+  VcAuditBlobResult({this.payload, this.payloadId, this.bcTxBlob});
 
   factory VcAuditBlobResult.fromJson(Map<String, dynamic> json) =>
       _$VcAuditBlobResultFromJson(json);

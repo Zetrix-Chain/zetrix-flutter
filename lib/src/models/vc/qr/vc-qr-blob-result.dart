@@ -10,10 +10,7 @@ class VcQrBlobResult {
   @JsonKey(name: "blob")
   String? blob;
 
-  VcQrBlobResult({
-    this.blobId, 
-    this.blob
-  });
+  VcQrBlobResult({this.blobId, this.blob});
 
   factory VcQrBlobResult.fromJson(Map<String, dynamic> json) =>
       _$VcQrBlobResultFromJson(json);

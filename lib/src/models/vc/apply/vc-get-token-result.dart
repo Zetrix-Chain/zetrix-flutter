@@ -4,12 +4,10 @@ part 'vc-get-token-result.g.dart';
 
 @JsonSerializable()
 class VcGetTokenResult {
-
   @JsonKey(name: "token")
   String? token;
 
-  VcGetTokenResult(
-      {this.token});
+  VcGetTokenResult({this.token});
 
   factory VcGetTokenResult.fromJson(Map<String, dynamic> json) =>
       _$VcGetTokenResultFromJson(json);

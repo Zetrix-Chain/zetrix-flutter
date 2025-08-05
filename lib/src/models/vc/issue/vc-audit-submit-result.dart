@@ -4,14 +4,10 @@ part 'vc-audit-submit-result.g.dart';
 
 @JsonSerializable()
 class VcAuditSubmitResult {
-
   @JsonKey(name: "did")
   String? did;
 
-
-  VcAuditSubmitResult({
-      this.did
-  });
+  VcAuditSubmitResult({this.did});
 
   factory VcAuditSubmitResult.fromJson(Map<String, dynamic> json) =>
       _$VcAuditSubmitResultFromJson(json);

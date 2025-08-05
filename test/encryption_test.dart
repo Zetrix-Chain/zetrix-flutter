@@ -53,8 +53,8 @@ void main() {
   });
 
   test('Sign blob', () async {
-    SignBlob resp = await encryption.signBlob("43556C34",
-        'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
+    SignBlob resp = await encryption.signBlob(
+        "43556C34", 'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
 
     Tools.logDebug('signBlob: ${resp.signBlob}');
     expect(resp, isNot(null));
@@ -74,15 +74,15 @@ void main() {
     expect(valid, true);
   });
 
-      test('Verify blob validation', () async {
+  test('Verify blob validation', () async {
     Encryption keypair = Encryption();
 
     List<int> signatureByte = HEX.decode(
         '693bd1b680baa91ff815acfbf6ad66f53bb7ded8c383e699ad91e8ca94979d795c23f8f089508f8dc93f637f3c12f8f2f1eca9bb951098f6fb6d85f60a138c0a');
     Tools.logDebug(signatureByte);
-  
+
     List<int> messageByte = Encoding.hexStringToBytes('43556C34');
-  
+
     bool valid = await keypair.verify(signatureByte, messageByte,
         'b0013333135690d479c3068a3a2ea495097e53ba32e900062e95cfbaf1ab06bc85848d689603');
     Tools.logDebug(valid);
@@ -93,8 +93,7 @@ void main() {
   test('Pinenacl sign and verify', () {
     String message = 'abc123';
 
-    Uint8List msgByte =
-        utf8.encode(message);
+    Uint8List msgByte = utf8.encode(message);
     nacl.SignedMessage sig = encryption.naclSign(
         'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo', msgByte);
 

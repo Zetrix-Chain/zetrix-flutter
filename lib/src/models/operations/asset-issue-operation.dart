@@ -19,7 +19,6 @@ class AssetIssueOperation extends BaseOperation {
 
   Map<String, dynamic> toJson() => _$AssetIssueOperationToJson(this);
 
-  static AssetIssueOperation fromJsonModel(
-          Map<String, dynamic> json) =>
+  static AssetIssueOperation fromJsonModel(Map<String, dynamic> json) =>
       AssetIssueOperation.fromJson(json);
 }

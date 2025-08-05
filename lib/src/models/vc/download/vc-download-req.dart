@@ -4,7 +4,6 @@ part 'vc-download-req.g.dart';
 
 @JsonSerializable()
 class VcDownloadReq {
-
   @JsonKey(name: "credentialId")
   String? credentialId;
 
@@ -12,7 +11,7 @@ class VcDownloadReq {
   String? userAddress;
 
   VcDownloadReq({
-      this.credentialId,
+    this.credentialId,
   });
 
   factory VcDownloadReq.fromJson(Map<String, dynamic> json) =>

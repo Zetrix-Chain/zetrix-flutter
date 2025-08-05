@@ -4,13 +4,10 @@ part 'vc-qr-blob-req.g.dart';
 
 @JsonSerializable()
 class VcQrBlobReq {
-
   @JsonKey(name: "address")
   String? address;
 
-  VcQrBlobReq({
-    this.address
-  });
+  VcQrBlobReq({this.address});
 
   factory VcQrBlobReq.fromJson(Map<String, dynamic> json) =>
       _$VcQrBlobReqFromJson(json);

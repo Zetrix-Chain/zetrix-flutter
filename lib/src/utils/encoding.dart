@@ -44,9 +44,9 @@ class Encoding {
   /// ```
   ///
   /// [hex]: A string containing only valid hexadecimal characters.
-  /// 
+  ///
   /// Returns: A [Uint8List] of decoded bytes from the input hex string.
-  /// 
+  ///
   /// Throws: May produce incorrect results or unexpected behavior if the string contains
   /// invalid hex characters or has an odd length (no explicit error handling is included).
   static Uint8List hexStringToBytes(String hex) {

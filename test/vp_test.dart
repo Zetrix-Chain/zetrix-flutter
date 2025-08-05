@@ -5,7 +5,6 @@ import 'package:zetrix_flutter/src/models/sdk-exceptions.dart';
 import 'package:zetrix_flutter/src/models/vp/vp-generate-req.dart';
 import 'package:zetrix_flutter/src/models/vp/vp-generate-resp.dart';
 import 'package:zetrix_flutter/src/services/vp.service.dart';
-import 'package:zetrix_flutter/src/utils/vp_jws.dart';
 
 void main() {
   test('generate vp jws', () async {

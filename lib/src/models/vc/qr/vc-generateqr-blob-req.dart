@@ -4,7 +4,6 @@ part 'vc-generateqr-blob-req.g.dart';
 
 @JsonSerializable()
 class VcGenerateQrBlobReq {
-
   @JsonKey(name: "userAddress")
   String? userAddress;
 
@@ -18,11 +17,11 @@ class VcGenerateQrBlobReq {
   String? vcId;
 
   VcGenerateQrBlobReq({
-      this.userAddress,
-      this.jws,
-      this.contentAssert,
-      this.vcId,
-      });
+    this.userAddress,
+    this.jws,
+    this.contentAssert,
+    this.vcId,
+  });
 
   factory VcGenerateQrBlobReq.fromJson(Map<String, dynamic> json) =>
       _$VcGenerateQrBlobReqFromJson(json);

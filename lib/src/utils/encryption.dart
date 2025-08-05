@@ -331,8 +331,7 @@ class Encryption {
       throw Exception('require message or encPrivateKey');
     }
 
-    Uint8List msgByte =
-        Encoding.hexStringToBytes(msg); 
+    Uint8List msgByte = Encoding.hexStringToBytes(msg);
 
     Uint8List privateKeyByte = parsePrivateKey(privateKey);
 
@@ -461,5 +460,4 @@ class Encryption {
 
     return s;
   }
-
 }

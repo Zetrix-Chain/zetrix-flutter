@@ -4,7 +4,6 @@ part 'vc-download-result.g.dart';
 
 @JsonSerializable()
 class VcDownloadResult {
-
   @JsonKey(name: "jws")
   String? jws;
 
@@ -23,14 +22,13 @@ class VcDownloadResult {
   @JsonKey(name: "isDownload")
   int? isDownload;
 
-  VcDownloadResult({
-      this.jws,
+  VcDownloadResult(
+      {this.jws,
       this.vcId,
       this.vc,
       this.issuerBid,
       this.issuerAddress,
-      this.isDownload
-  });
+      this.isDownload});
 
   factory VcDownloadResult.fromJson(Map<String, dynamic> json) =>
       _$VcDownloadResultFromJson(json);

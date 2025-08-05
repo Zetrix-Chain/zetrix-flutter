@@ -1,5 +1,4 @@
 enum OperationType {
-
   // Unknown operation
   UNKNOWN,
 

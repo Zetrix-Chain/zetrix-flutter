@@ -4,7 +4,6 @@ part 'vc-qr-token-req.g.dart';
 
 @JsonSerializable()
 class VcQrTokenReq {
-
   @JsonKey(name: "chainType")
   String? chainType;
 
@@ -21,12 +20,12 @@ class VcQrTokenReq {
   String? address;
 
   VcQrTokenReq({
-      this.chainType,
-      this.blob,
-      this.signBlob,
-      this.publicKey,
-      this.address,
-      });
+    this.chainType,
+    this.blob,
+    this.signBlob,
+    this.publicKey,
+    this.address,
+  });
 
   factory VcQrTokenReq.fromJson(Map<String, dynamic> json) =>
       _$VcQrTokenReqFromJson(json);

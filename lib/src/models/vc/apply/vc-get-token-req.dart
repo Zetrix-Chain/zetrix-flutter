@@ -4,7 +4,6 @@ part 'vc-get-token-req.g.dart';
 
 @JsonSerializable()
 class VcGetTokenReq {
-
   @JsonKey(name: "blobId")
   String? blobId;
 
@@ -18,11 +17,11 @@ class VcGetTokenReq {
   String? address;
 
   VcGetTokenReq({
-      this.blobId,
-      this.blobSign,
-      this.publicKey,
-      this.address,
-      });
+    this.blobId,
+    this.blobSign,
+    this.publicKey,
+    this.address,
+  });
 
   factory VcGetTokenReq.fromJson(Map<String, dynamic> json) =>
       _$VcGetTokenReqFromJson(json);

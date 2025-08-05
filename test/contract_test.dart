@@ -11,8 +11,7 @@ void main() {
     req.optType = 2;
     req.feeLimit = 1000000;
     req.gasPrice = 10;
-    req.input =
-        '{"method": "getAllTasks", "params": {"status":"None"}}';
+    req.input = '{"method": "getAllTasks", "params": {"status":"None"}}';
     Object? finalResp;
     ZetrixSDKResult<ContractCallResult> resp = await service.call(req);
 

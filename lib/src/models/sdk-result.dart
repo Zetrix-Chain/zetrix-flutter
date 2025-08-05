@@ -9,5 +9,6 @@ part 'sdk-result.freezed.dart';
 abstract class ZetrixSDKResult<T> with _$ZetrixSDKResult<T> {
   const factory ZetrixSDKResult.success({T? data}) = Success<T>;
 
-  const factory ZetrixSDKResult.failure({ZetrixSDKExceptions? error}) = Failure<T>;
+  const factory ZetrixSDKResult.failure({ZetrixSDKExceptions? error}) =
+      Failure<T>;
 }

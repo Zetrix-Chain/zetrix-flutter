@@ -32,7 +32,8 @@ abstract class ZetrixSDKExceptions with _$ZetrixSDKExceptions {
 
   const factory ZetrixSDKExceptions.serviceUnavailable() = ServiceUnavailable;
 
-  const factory ZetrixSDKExceptions.noInternetConnection() = NoInternetConnection;
+  const factory ZetrixSDKExceptions.noInternetConnection() =
+      NoInternetConnection;
 
   const factory ZetrixSDKExceptions.formatException() = FormatException;
 
@@ -55,8 +56,7 @@ abstract class ZetrixSDKExceptions with _$ZetrixSDKExceptions {
               sdkExceptions = const ZetrixSDKExceptions.requestTimeout();
               break;
             case DioExceptionType.unknown:
-              sdkExceptions =
-                  const ZetrixSDKExceptions.noInternetConnection();
+              sdkExceptions = const ZetrixSDKExceptions.noInternetConnection();
               break;
             case DioExceptionType.receiveTimeout:
               switch (error.response!.statusCode) {

@@ -4,16 +4,13 @@ part 'vc-get-blob-result.g.dart';
 
 @JsonSerializable()
 class VcGetBlobResult {
-
   @JsonKey(name: "blobId")
   String? blobId;
 
   @JsonKey(name: "blob")
   String? blob;
 
-  VcGetBlobResult(
-      {this.blobId,
-      this.blob});
+  VcGetBlobResult({this.blobId, this.blob});
 
   factory VcGetBlobResult.fromJson(Map<String, dynamic> json) =>
       _$VcGetBlobResultFromJson(json);

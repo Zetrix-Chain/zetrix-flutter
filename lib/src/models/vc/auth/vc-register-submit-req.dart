@@ -16,7 +16,8 @@ class VcRegisterSubmitReq {
   @JsonKey(name: "address")
   String? address;
 
-  VcRegisterSubmitReq({this.blobId, this.blobSign, this.publicKey, this.address});
+  VcRegisterSubmitReq(
+      {this.blobId, this.blobSign, this.publicKey, this.address});
 
   factory VcRegisterSubmitReq.fromJson(Map<String, dynamic> json) =>
       _$VcRegisterSubmitReqFromJson(json);

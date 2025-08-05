@@ -4,10 +4,9 @@ part 'type-threshold.g.dart';
 
 @JsonSerializable()
 class TypeThreshold {
-  
   @JsonKey(name: "type")
   int? type;
-  
+
   @JsonKey(name: "threshold")
   int? threshold;
 

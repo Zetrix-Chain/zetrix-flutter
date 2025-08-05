@@ -9,6 +9,8 @@ import 'package:zetrix_flutter/zetrix_flutter.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(title: 'Blockchain Demo', home: HomeScreen());
@@ -22,6 +24,8 @@ class HomeScreen extends StatelessWidget {
     _HomeOption("Transaction", Icons.swap_horiz, TransactionScreen()),
     _HomeOption("Smart Contract", Icons.code, ContractScreen()),
   ];
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -102,21 +106,29 @@ class HomeButton extends StatelessWidget {
 }
 
 class AccountScreen extends StatefulWidget {
+  const AccountScreen({super.key});
+
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class BlockScreen extends StatefulWidget {
+  const BlockScreen({super.key});
+
   @override
   State<BlockScreen> createState() => _BlockScreenState();
 }
 
 class TransactionScreen extends StatefulWidget {
+  const TransactionScreen({super.key});
+
   @override
   State<TransactionScreen> createState() => _TransactionScreenState();
 }
 
 class ContractScreen extends StatefulWidget {
+  const ContractScreen({super.key});
+
   @override
   State<ContractScreen> createState() => _ContractScreenState();
 }
@@ -287,7 +299,6 @@ class _ContractScreenState extends State<ContractScreen> {
   void _callContract() async {
     try {
       final Object? contractResult = await zetrixService.callZtxContract();
-      final json = contractResult as Map<String, dynamic>;
 
       Navigator.push(
         context,

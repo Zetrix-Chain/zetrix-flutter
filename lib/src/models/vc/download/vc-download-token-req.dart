@@ -4,7 +4,6 @@ part 'vc-download-token-req.g.dart';
 
 @JsonSerializable()
 class VcDownloadTokenReq {
-
   @JsonKey(name: "signBlob")
   String? signBlob;
 
@@ -18,11 +17,11 @@ class VcDownloadTokenReq {
   String? blob;
 
   VcDownloadTokenReq({
-      this.blob,
-      this.signBlob,
-      this.publicKey,
-      this.address,
-      });
+    this.blob,
+    this.signBlob,
+    this.publicKey,
+    this.address,
+  });
 
   factory VcDownloadTokenReq.fromJson(Map<String, dynamic> json) =>
       _$VcDownloadTokenReqFromJson(json);

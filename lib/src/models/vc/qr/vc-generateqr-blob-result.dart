@@ -10,10 +10,7 @@ class VcGenerateQrBlobResult {
   @JsonKey(name: "blob")
   String? blob;
 
-  VcGenerateQrBlobResult({
-    this.blob, 
-    this.blobId
-  });
+  VcGenerateQrBlobResult({this.blob, this.blobId});
 
   factory VcGenerateQrBlobResult.fromJson(Map<String, dynamic> json) =>
       _$VcGenerateQrBlobResultFromJson(json);
