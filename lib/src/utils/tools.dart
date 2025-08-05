@@ -1,3 +1,5 @@
+import 'package:logger/logger.dart';
+
 class Tools {
   static bool isEmptyString(String? str) {
     return str == null || str.isEmpty;
@@ -41,5 +43,16 @@ class Tools {
     });
 
     return validated;
+  }
+
+  /// Logs a debug message using the PrettyPrinter format.
+  ///
+  /// This method initializes a logger with a [PrettyPrinter] and logs the provided message
+  /// at the debug (`d`) level. It is primarily used for structured and readable debugging output.
+  static void logDebug(dynamic msg) {
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
+    logger.d(msg);
   }
 }

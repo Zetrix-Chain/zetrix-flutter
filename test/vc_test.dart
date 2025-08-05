@@ -69,7 +69,7 @@ void main() {
     VcRegisterSubmitResp? finalResp;
 
     SignBlob signResp =
-        await encryption.signBlob(holder["blob"], holder["privKey"]);
+        await encryption.signBlob(holder["blob"]!, holder["privKey"]!);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
     req.blobId = holder["blobId"];
@@ -122,7 +122,7 @@ void main() {
     VcRegisterSubmitResp? finalResp;
 
     SignBlob signResp =
-        await encryption.signBlob(issuer["blob"], issuer["privKey"]);
+        await encryption.signBlob(issuer["blob"]!, issuer["privKey"]!);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
     req.blobId = issuer["blobId"];
@@ -178,7 +178,7 @@ void main() {
     VcRegisterSubmitResp? finalResp;
 
     SignBlob signResp =
-        await encryption.signBlob(holder["blob"], holder["privKey"]);
+        await encryption.signBlob(holder["blob"]!, holder["privKey"]!);
 
     VcRegisterSubmitReq req = VcRegisterSubmitReq();
     req.blobId = holder["blobId"];
@@ -270,7 +270,7 @@ void main() {
     VcAuditSubmitResult? finalResp;
 
     SignBlob signBcTxBlob =
-        await encryption.signBlob(apply["bcTxBlob"], issuer["privKey"]);
+        await encryption.signBlob(apply["bcTxBlob"]!, issuer["privKey"]!);
 
     SignMessage signPayload =
         await encryption.signMessage(apply["payload"], issuer["privKey"]);
@@ -446,7 +446,7 @@ void main() {
     String qrCode = "";
 
     SignBlob sign =
-        await encryption.signBlob(verify["blob"], holder["privKey"]);
+        await encryption.signBlob(verify["blob"]!, holder["privKey"]!);
 
     VcGenerateQrReq req = VcGenerateQrReq();
     req.blobId = verify["blobId"];

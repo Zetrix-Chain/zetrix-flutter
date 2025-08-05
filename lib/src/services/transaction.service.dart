@@ -104,7 +104,7 @@ class ZetrixTransactionService extends BaseNodeService {
     result.signatures = [];
     for (int i = 0; i < req.privateKeys!.length; i++) {
       SignBlob signedBlob =
-          await encryption.signBlob(req.blob, req.privateKeys![i]);
+          await encryption.signBlob(req.blob!, req.privateKeys![i]);
       Signature sig = Signature();
       sig.publicKey = signedBlob.publicKey;
       sig.signData = signedBlob.signBlob;

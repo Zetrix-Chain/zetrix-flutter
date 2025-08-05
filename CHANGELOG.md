@@ -1,3 +1,11 @@
+## 0.0.9
+
+### Added
+- Added example
+
+### Changed
+- Fix encryption
+
 ## 0.0.8
 
 ### Changed

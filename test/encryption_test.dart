@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pinenacl/ed25519.dart' as nacl;
 import "package:hex/hex.dart";
+import 'package:pinenacl/ed25519.dart' as nacl;
+import 'package:zetrix_flutter/src/utils/encoding.dart';
+import 'package:zetrix_flutter/src/utils/tools.dart';
 import 'package:zetrix_flutter/zetrix_flutter.dart';
 
 void main() {
@@ -21,7 +24,7 @@ void main() {
     String pubKey = await encryption.getEncPublicKey(
         'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
 
-    print(pubKey);
+    Tools.logDebug(pubKey);
 
     expect(pubKey,
         'b0013333135690d479c3068a3a2ea495097e53ba32e900062e95cfbaf1ab06bc85848d689603');
@@ -43,11 +46,17 @@ void main() {
   });
 
   test('Sign message', () async {
-    // Signature signature = Signature();
-
     SignMessage resp = await encryption.signMessage(
         "testABC", 'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
 
+    expect(resp, isNot(null));
+  });
+
+  test('Sign blob', () async {
+    SignBlob resp = await encryption.signBlob("43556C34",
+        'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo');
+
+    Tools.logDebug('signBlob: ${resp.signBlob}');
     expect(resp, isNot(null));
   });
 
@@ -55,26 +64,41 @@ void main() {
     Encryption keypair = Encryption();
 
     List<int> signatureByte = HEX.decode(
-        '6bf8535d178011a1f361afdb21d43940010418caea83368ac48477c5c2302ede0436ca90599237b3adf02698b2f96348ea397e125909b9ed201d055ab241290d');
-    print(signatureByte);
+        '6BF8535D178011A1F361AFDB21D43940010418CAEA83368AC48477C5C2302EDE0436CA90599237B3ADF02698B2F96348EA397E125909B9ED201D055AB241290D');
+    Tools.logDebug(signatureByte);
     List<int> messageByte = utf8.encode('43556C34');
     bool valid = await keypair.verify(signatureByte, messageByte,
         'b0013333135690d479c3068a3a2ea495097e53ba32e900062e95cfbaf1ab06bc85848d689603');
-    print(valid);
+    Tools.logDebug(valid);
+
+    expect(valid, true);
+  });
+
+      test('Verify blob validation', () async {
+    Encryption keypair = Encryption();
+
+    List<int> signatureByte = HEX.decode(
+        '693bd1b680baa91ff815acfbf6ad66f53bb7ded8c383e699ad91e8ca94979d795c23f8f089508f8dc93f637f3c12f8f2f1eca9bb951098f6fb6d85f60a138c0a');
+    Tools.logDebug(signatureByte);
+  
+    List<int> messageByte = Encoding.hexStringToBytes('43556C34');
+  
+    bool valid = await keypair.verify(signatureByte, messageByte,
+        'b0013333135690d479c3068a3a2ea495097e53ba32e900062e95cfbaf1ab06bc85848d689603');
+    Tools.logDebug(valid);
 
     expect(valid, true);
   });
 
   test('Pinenacl sign and verify', () {
-    // Encryption signature = Signature();
+    String message = 'abc123';
 
-    String message = '71413349';
-    List<int> msg = message.codeUnits;
-    Uint8List msgByte = Uint8List.fromList(msg);
+    Uint8List msgByte =
+        utf8.encode(message);
     nacl.SignedMessage sig = encryption.naclSign(
         'privBtnsbZV3Y3oG91QaeNhzNFpGbc9pmgdRnhKRs34ws2jg3gJqSMQo', msgByte);
 
-    print('Signature Hex: ${HEX.encode(sig.signature)}');
+    Tools.logDebug('Signature Hex: ${HEX.encode(sig.signature)}');
 
     bool valid = encryption.naclVerify(sig.signature, msgByte,
         'b0013333135690d479c3068a3a2ea495097e53ba32e900062e95cfbaf1ab06bc85848d689603');

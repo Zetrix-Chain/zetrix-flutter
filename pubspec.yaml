@@ -1,6 +1,6 @@
 name: zetrix_flutter
 description: Zetrix flutter SDK for Zetrix Blockchain
-version: 0.0.8
+version: 0.0.9
 homepage: https://docs.zetrix.com/en
 repository: https://github.com/Zetrix-Chain/zetrix-flutter
 
@@ -22,6 +22,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   pointycastle: ^4.0.0
   convert: ^3.1.2
+  logger: ^2.6.1
 
 dev_dependencies:
 #  test: ^1.23.1
